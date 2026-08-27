@@ -13,7 +13,7 @@ This file is the execution checklist for the MVP described in `PRD.md`. Update i
 ## Current Status
 
 - **Current phase:** Phase 1 - Foundation and architecture
-- **Next task:** Configure shadcn/ui using the repository's Tailwind CSS version and project conventions.
+- **Next task:** Establish neutral design tokens for color, typography, spacing, borders, focus states, and restrained shadows.
 - **MVP status:** Not started
 - **Last updated:** 2026-08-27
 
@@ -24,7 +24,7 @@ Goal: establish a maintainable frontend foundation before building product featu
 - [x] Audit the generated project, dependencies, scripts, and existing routes against the PRD.
 - [x] Read the relevant Next.js 16.3.3 local documentation before making framework-specific changes.
 - [x] Define the target `src/` structure for app routes, components, data, color utilities, SEO utilities, and shared types.
-- [ ] Configure shadcn/ui using the repository's Tailwind CSS version and project conventions.
+- [x] Configure shadcn/ui using the repository's Tailwind CSS version and project conventions.
 - [ ] Establish neutral design tokens for color, typography, spacing, borders, focus states, and restrained shadows.
 - [ ] Add shared layout primitives and responsive page-width conventions.
 - [ ] Define quality commands for linting, type checking, formatting, tests, and production builds.
@@ -230,3 +230,4 @@ Goal: deploy the frontend-only MVP and verify the real production experience.
 | 2026-08-27 | Phase 1 | Audited the generated Next.js starter, dependencies, scripts, existing routes, PRD route gaps, target structure, and baseline quality commands in `DEVELOPMENT_AUDIT.md`. | `npm.cmd run lint` passed; `npx.cmd tsc --noEmit` passed; `npm.cmd run build` failed because `next/font/google` could not fetch Geist fonts from Google Fonts in this environment. |
 | 2026-08-27 | Phase 1 | Read and recorded local Next.js 16.3.3 documentation implications for App Router structure, pages, layouts, dynamic routes, static params, metadata, Server and Client Components, CSS, fonts, `src/`, and TypeScript. | Updated `DEVELOPMENT_AUDIT.md`; no application code changed. |
 | 2026-08-27 | Phase 1 | Adopted `src/` source layout by moving the App Router to `src/app`, mapping `@/*` to `./src/*`, and adding source-structure README files for app routes, components, static data, color utilities, SEO utilities, validation, clipboard, and shared types. | `npm.cmd run lint` passed; `npx.cmd next typegen` passed; `npx.cmd tsc --noEmit` passed after route type generation; `npm.cmd run build` still fails on the known `next/font/google` network fetch for Geist fonts. |
+| 2026-08-27 | Phase 1 | Configured shadcn/ui with Tailwind CSS v4, `components.json`, Base UI, lucide icons, CSS variables, `@/components/ui`, `@/lib/utils`, and the initial `Button` component. | `npm.cmd run lint` passed; `npx.cmd tsc --noEmit` passed; `npm.cmd run build` still fails on the known `next/font/google` network fetch for Geist fonts. |

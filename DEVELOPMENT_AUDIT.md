@@ -202,6 +202,48 @@ Verified after adopting `src/` on 2026-08-27:
 - `npm.cmd run build`: failed for the same known `next/font/google` network
   fetch issue, now tracing to `src/app/layout.tsx`.
 
+## shadcn/ui Baseline
+
+Configured on 2026-08-27 with the official shadcn CLI for an existing Next.js
+project using Tailwind CSS v4 and the `src/` import alias.
+
+Configuration:
+
+- CLI command: `npx.cmd shadcn@latest init --defaults --no-monorepo`
+- CLI version used by npm: `shadcn@4.19.0`
+- Style: `base-nova`
+- Base library: Base UI
+- Icon library: `lucide`
+- Tailwind CSS file: `src/app/globals.css`
+- CSS variables: enabled
+- Import aliases:
+  - components: `@/components`
+  - UI components: `@/components/ui`
+  - utils: `@/lib/utils`
+  - lib: `@/lib`
+  - hooks: `@/hooks`
+
+Files created or updated by setup:
+
+- `components.json`
+- `src/components/ui/button.tsx`
+- `src/lib/utils.ts`
+- `src/app/globals.css`
+- `package.json`
+- `package-lock.json`
+
+Manual follow-up applied:
+
+- Restored the Tailwind font token to use `--font-geist-sans` instead of a
+  self-referential `--font-sans` value.
+
+Verification after shadcn/ui setup:
+
+- `npm.cmd run lint`: passed.
+- `npx.cmd tsc --noEmit`: passed.
+- `npm.cmd run build`: still fails on the known `next/font/google` network
+  fetch issue for Geist and Geist Mono.
+
 ## Initial Gaps Against PRD
 
 - Generated starter homepage must be replaced.
