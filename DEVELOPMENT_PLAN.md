@@ -6,14 +6,14 @@ This file is the execution checklist for the MVP described in `PRD.md`. Update i
 
 - Complete one focused checklist item at a time unless a larger batch is explicitly approved.
 - Mark an item complete only after its implementation and relevant verification pass.
-- Do not start the next phase until the current phase exit criteria are satisfied, unless the exception is recorded in the decision log.
+- Do not start the next phase until the current phase exit criteria are satisfied, unless an explicit exception is approved.
 - Read the relevant local Next.js guide in `node_modules/next/dist/docs/` before changing framework APIs, conventions, or file structure.
 - Keep version 1 frontend-only. Do not add a backend, database, ORM, CMS, admin panel, authentication, payments, or user-generated content.
 
 ## Current Status
 
 - **Current phase:** Phase 1 - Foundation and architecture
-- **Next task:** Establish neutral design tokens for color, typography, spacing, borders, focus states, and restrained shadows.
+- **Next task:** Create static data modules for general palettes, website palettes, categories, and moods.
 - **MVP status:** Not started
 - **Last updated:** 2026-08-27
 
@@ -25,24 +25,24 @@ Goal: establish a maintainable frontend foundation before building product featu
 - [x] Read the relevant Next.js 16.3.3 local documentation before making framework-specific changes.
 - [x] Define the target `src/` structure for app routes, components, data, color utilities, SEO utilities, and shared types.
 - [x] Configure shadcn/ui using the repository's Tailwind CSS version and project conventions.
-- [ ] Establish neutral design tokens for color, typography, spacing, borders, focus states, and restrained shadows.
-- [ ] Add shared layout primitives and responsive page-width conventions.
-- [ ] Define quality commands for linting, type checking, formatting, tests, and production builds.
-- [ ] Decide whether dark mode is included in MVP and record the decision below.
+- [x] Establish neutral design tokens for color, typography, spacing, borders, focus states, and restrained shadows.
+- [x] Add shared layout primitives and responsive page-width conventions.
+- [x] Define quality commands for linting, type checking, formatting, tests, and production builds.
+- [x] Decide whether dark mode is included in MVP and record the decision below.
 
 ### Phase 1 Exit Criteria
 
 - [ ] The project structure and UI foundations support all planned MVP routes.
-- [ ] The application passes the agreed baseline quality commands.
+- [x] The application passes the agreed baseline quality commands.
 - [ ] No backend or runtime content infrastructure has been introduced.
 
 ## Phase 2 - Static Content Model and Seed Data
 
 Goal: create a validated, replaceable static data layer for all palette content.
 
-- [ ] Define centralized TypeScript types for palettes, colors, categories, moods, color families, and website palette roles.
-- [ ] Enforce general palette rules: 3-8 colors, unique slug, published status, and normalized uppercase HEX values.
-- [ ] Enforce website palette rules: exactly two colors, explicit Primary and Secondary values, `paletteType: "website"`, and website preview enabled.
+- [x] Define centralized TypeScript types for palettes, colors, categories, moods, color families, and website palette roles.
+- [x] Enforce general palette rules: 3-8 colors, unique slug, published status, and normalized uppercase HEX values.
+- [x] Enforce website palette rules: exactly two colors, explicit Primary and Secondary values, `paletteType: "website"`, and website preview enabled.
 - [ ] Create static data modules for general palettes, website palettes, categories, and moods.
 - [ ] Add a small data access layer so UI components do not depend on the physical data-file layout.
 - [ ] Add validation for duplicate IDs/slugs, invalid HEX values, missing taxonomy values, and website palette invariants.
@@ -214,20 +214,21 @@ Goal: deploy the frontend-only MVP and verify the real production experience.
 - User-site URL previews, browser extensions, embed scripts, and additional preview templates
 - Dynamic palette Open Graph image generation, unless approved during Phase 6
 
-## Decision Log
-
-| Date | Decision | Reason |
-| --- | --- | --- |
-| 2026-08-27 | Use `DEVELOPMENT_PLAN.md` as the phased execution tracker. | Keeps progress separate from the product requirements in `PRD.md`. |
-| 2026-08-27 | Keep version 1 frontend-only with static TypeScript or JSON content. | This is an explicit PRD constraint and keeps the first release lightweight. |
-| 2026-08-27 | Treat website palettes as exactly two colors with explicit Primary and Secondary roles. | This invariant drives cards, detail pages, filters, and the preview experience. |
-
 ## Progress Log
 
-| Date | Phase | Update | Verification |
-| --- | --- | --- | --- |
-| 2026-08-27 | Planning | Created the initial PRD-derived development plan. | Reviewed against `PRD.md`; no product code changed. |
-| 2026-08-27 | Phase 1 | Audited the generated Next.js starter, dependencies, scripts, existing routes, PRD route gaps, target structure, and baseline quality commands in `DEVELOPMENT_AUDIT.md`. | `npm.cmd run lint` passed; `npx.cmd tsc --noEmit` passed; `npm.cmd run build` failed because `next/font/google` could not fetch Geist fonts from Google Fonts in this environment. |
-| 2026-08-27 | Phase 1 | Read and recorded local Next.js 16.3.3 documentation implications for App Router structure, pages, layouts, dynamic routes, static params, metadata, Server and Client Components, CSS, fonts, `src/`, and TypeScript. | Updated `DEVELOPMENT_AUDIT.md`; no application code changed. |
-| 2026-08-27 | Phase 1 | Adopted `src/` source layout by moving the App Router to `src/app`, mapping `@/*` to `./src/*`, and adding source-structure README files for app routes, components, static data, color utilities, SEO utilities, validation, clipboard, and shared types. | `npm.cmd run lint` passed; `npx.cmd next typegen` passed; `npx.cmd tsc --noEmit` passed after route type generation; `npm.cmd run build` still fails on the known `next/font/google` network fetch for Geist fonts. |
-| 2026-08-27 | Phase 1 | Configured shadcn/ui with Tailwind CSS v4, `components.json`, Base UI, lucide icons, CSS variables, `@/components/ui`, `@/lib/utils`, and the initial `Button` component. | `npm.cmd run lint` passed; `npx.cmd tsc --noEmit` passed; `npm.cmd run build` still fails on the known `next/font/google` network fetch for Geist fonts. |
+| Date       | Phase    | Update                                                                                                                                                                                                                                         | Verification                                                                                                                                                                                                        |
+| ---------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 2026-08-27 | Planning | Created the initial PRD-derived development plan.                                                                                                                                                                                              | Reviewed against `PRD.md`; no product code changed.                                                                                                                                                                 |
+| 2026-08-27 | Phase 1  | Audited the generated Next.js starter, dependencies, scripts, existing routes, PRD route gaps, target structure, and baseline quality commands.                                                                                                | `npm.cmd run lint` passed; `npx.cmd tsc --noEmit` passed; `npm.cmd run build` failed because `next/font/google` could not fetch Geist fonts from Google Fonts in this environment.                                  |
+| 2026-08-27 | Phase 1  | Read and recorded local Next.js 16.3.3 documentation implications for App Router structure, pages, layouts, dynamic routes, static params, metadata, Server and Client Components, CSS, fonts, `src/`, and TypeScript.                         | Documentation review completed; no application code changed.                                                                                                                                                        |
+| 2026-08-27 | Phase 1  | Adopted `src/` source layout by moving the App Router to `src/app` and mapping `@/*` to `./src/*`.                                                                                                                                             | `npm.cmd run lint` passed; `npx.cmd next typegen` passed; `npx.cmd tsc --noEmit` passed after route type generation; `npm.cmd run build` still fails on the known `next/font/google` network fetch for Geist fonts. |
+| 2026-08-27 | Phase 1  | Configured shadcn/ui with Tailwind CSS v4, `components.json`, Base UI, lucide icons, CSS variables, `@/components/ui`, `@/lib/utils`, and the initial `Button` component.                                                                      | `npm.cmd run lint` passed; `npx.cmd tsc --noEmit` passed; `npm.cmd run build` still fails on the known `next/font/google` network fetch for Geist fonts.                                                            |
+| 2026-08-27 | Phase 1  | Established neutral design tokens for color, typography, spacing, borders, focus states, radius, and restrained shadows; replaced generated Google font imports with system font tokens.                                                       | `npm.cmd run lint` passed; `npx.cmd tsc --noEmit` passed; `npm.cmd run build` passed.                                                                                                                               |
+| 2026-08-27 | Phase 1  | Added shared layout primitives and responsive page-width conventions for page shell, main region, page containers, sections, and section headers.                                                                                              | `npm.cmd run lint` passed; `npx.cmd tsc --noEmit` passed; `npm.cmd run build` passed.                                                                                                                               |
+| 2026-08-27 | Phase 1  | Installed Prettier and `prettier-plugin-tailwindcss`, added formatting scripts, added a `quality` script, and documented that a real `test` script will be added when Phase 7 introduces tests.                                                | `npm.cmd run format` passed; `npm.cmd run quality` passed.                                                                                                                                                          |
+| 2026-08-27 | Phase 1  | Recorded the MVP dark mode decision: no dark mode and no theme toggle in version 1.                                                                                                                                                            | Reviewed PRD section 20 and existing foundation; no application code changed.                                                                                                                                       |
+| 2026-08-27 | Phase 1  | Confirmed the agreed baseline quality commands now pass through the single `quality` script.                                                                                                                                                   | `npm.cmd run quality` passed, including lint, typecheck, format check, and production build.                                                                                                                        |
+| 2026-08-27 | Planning | Removed `DEVELOPMENT_AUDIT.md` and deleted `README.md` files under `src/**` so project tracking stays centralized in this plan and implementation directories stay code-focused.                                                               | `npm.cmd run format` passed; `npm.cmd run quality` passed.                                                                                                                                                          |
+| 2026-08-27 | Phase 2  | Added centralized palette and taxonomy types, including discriminated `general` and `website` palette unions, `HexColor`, `PaletteColor`, category/mood/color-family unions, and website palette role types.                                   | `npm.cmd run format` passed; `npm.cmd run quality` passed.                                                                                                                                                          |
+| 2026-08-27 | Phase 2  | Added runtime general-palette validation helpers for 3-8 colors, lowercase hyphenated slugs, valid draft/published status, and uppercase 6-digit HEX normalization.                                                                            | `npm.cmd run format` passed; `npm.cmd run quality` passed.                                                                                                                                                          |
+| 2026-08-27 | Phase 2  | Added website-palette normalization and validation helpers for exactly two colors, required `primaryColor` and `secondaryColor`, `paletteType: "website"`, `supportsWebsitePreview: true`, and role colors present in the main `colors` array. | `npm.cmd run format` passed; `npm.cmd run quality` passed.                                                                                                                                                          |
