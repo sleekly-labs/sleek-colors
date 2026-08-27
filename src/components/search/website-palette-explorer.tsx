@@ -169,7 +169,7 @@ function WebsitePaletteExplorer({
           ...palette.categories,
           ...palette.moods,
           ...palette.colorFamilies,
-          ...palette.colors.map((color) => color.name ?? ""),
+          ...palette.colors.map((color) => color.hex),
           palette.primaryColor,
           palette.secondaryColor
         ]

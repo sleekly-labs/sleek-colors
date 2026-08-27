@@ -1,7 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import { Copy, ExternalLink } from "lucide-react";
+import Link from "next/link";
 import { useId, useState } from "react";
 
 import { Button, buttonLinkClassName } from "@/components/ui/button";
@@ -126,7 +126,7 @@ function GeneralPaletteCard({
                   onClick={() => void handleCopy(color.hex)}
                   className="h-auto w-full justify-start px-3 py-2 text-left whitespace-normal"
                   aria-describedby={statusId}
-                  aria-label={`Copy ${color.hex}${color.name ? `, ${color.name}` : ""}`}
+                  aria-label={`Copy ${color.hex}`}
                 >
                   <span
                     className="size-8 shrink-0 rounded-md border"
@@ -136,9 +136,6 @@ function GeneralPaletteCard({
                   <span className="min-w-0 flex-1">
                     <span className="block text-sm font-medium">
                       {color.hex}
-                    </span>
-                    <span className="text-muted-foreground block text-xs">
-                      {color.name ?? "Unnamed color"}
                     </span>
                   </span>
                   <CopyFeedback copied={isCopied} />

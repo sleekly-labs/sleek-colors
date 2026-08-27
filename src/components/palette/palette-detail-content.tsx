@@ -168,14 +168,14 @@ function PaletteDetailContent({
                   size="icon-sm"
                   onClick={() => void handleCopy(color.hex)}
                   aria-describedby={statusId}
-                  aria-label={`Copy ${color.hex}${color.name ? `, ${color.name}` : ""}`}
+                  aria-label={`Copy ${color.hex}`}
                   className="bg-white/15 text-white shadow-none hover:bg-white/25"
                 >
                   <Copy />
                 </Button>
               </div>
               <div className="space-y-1 text-white">
-                <p className="text-sm font-medium">{color.name ?? "Color"}</p>
+                <p className="text-sm font-medium">Color {index + 1}</p>
                 <p className="text-lg font-semibold">{color.hex}</p>
               </div>
             </div>
@@ -214,7 +214,7 @@ function PaletteDetailContent({
                   onClick={() => void handleCopy(color.hex)}
                   className="h-auto w-full justify-start px-4 py-3 text-left whitespace-normal"
                   aria-describedby={statusId}
-                  aria-label={`Copy ${color.hex}${color.name ? `, ${color.name}` : ""}`}
+                  aria-label={`Copy ${color.hex}`}
                 >
                   <span
                     className="size-10 shrink-0 rounded-md border"
@@ -224,9 +224,6 @@ function PaletteDetailContent({
                   <span className="min-w-0 flex-1">
                     <span className="block text-sm font-medium">
                       {color.hex}
-                    </span>
-                    <span className="text-muted-foreground block text-xs">
-                      {color.name ?? "Unnamed color"}
                     </span>
                   </span>
                   <CopyFeedback copied={isCopied} />

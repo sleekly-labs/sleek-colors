@@ -19,7 +19,6 @@ type WebsitePaletteCardProps = {
 
 type RoleColor = {
   hex: string;
-  label: string;
   role: WebsitePaletteRole;
 };
 
@@ -36,16 +35,10 @@ function WebsitePaletteCard({
   const roleColors: RoleColor[] = [
     {
       hex: palette.primaryColor,
-      label:
-        palette.colors.find((color) => color.hex === palette.primaryColor)
-          ?.name ?? "Primary color",
       role: "primary"
     },
     {
       hex: palette.secondaryColor,
-      label:
-        palette.colors.find((color) => color.hex === palette.secondaryColor)
-          ?.name ?? "Secondary color",
       role: "secondary"
     }
   ];
@@ -145,9 +138,6 @@ function WebsitePaletteCard({
                     </span>
                     <span className="block text-sm font-medium">
                       {color.hex}
-                    </span>
-                    <span className="text-muted-foreground block text-xs">
-                      {color.label}
                     </span>
                   </span>
                   <CopyFeedback copied={isCopied} />

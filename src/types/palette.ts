@@ -66,7 +66,6 @@ export type PaletteStatus = "draft" | "published";
 
 export type PaletteColor = {
   hex: HexColor;
-  name?: string;
 };
 
 export type BasePalette = {
