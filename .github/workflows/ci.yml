@@ -17,7 +17,7 @@ concurrency:
 
 jobs:
   quality:
-    name: Test and build
+    name: Quality Checks
     runs-on: ubuntu-latest
 
     steps:

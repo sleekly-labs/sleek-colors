@@ -7,6 +7,7 @@ import {
 import { Analytics } from "@vercel/analytics/next";
 import type { Metadata } from "next";
 import { DM_Sans, Sora } from "next/font/google";
+import type { ReactNode } from "react";
 import "./globals.css";
 
 const dmSans = DM_Sans({
@@ -26,7 +27,11 @@ export const metadata: Metadata = {
   description: "Curated color palettes and website color combinations."
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+type RootLayoutProps = Readonly<{
+  children: ReactNode;
+}>;
+
+export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html
       lang="en"
