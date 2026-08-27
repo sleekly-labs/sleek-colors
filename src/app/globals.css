@@ -56,9 +56,10 @@
 }
 
 :root {
-  --font-body: "Inter", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-body:
+    var(--font-dm-sans), "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --font-display:
-    "Inter", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    var(--font-sora), "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --font-code: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
   --space-page: clamp(1rem, 2vw, 2rem);
   --space-section: 4rem;

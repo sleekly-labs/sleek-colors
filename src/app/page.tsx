@@ -1,9 +1,9 @@
-import { Suspense } from "react";
-import Link from "next/link";
 import { ArrowRight, Search, Sparkles } from "lucide-react";
+import Link from "next/link";
+import { Suspense } from "react";
 
-import { GeneralPaletteGrid, WebsitePaletteGrid } from "@/components/palette";
 import { PageContainer, PageSection, SectionHeader } from "@/components/layout";
+import { GeneralPaletteGrid, WebsitePaletteGrid } from "@/components/palette";
 import { PaletteExplorerPreview } from "@/components/search";
 import { buttonLinkClassName } from "@/components/ui/button";
 import {
@@ -39,7 +39,7 @@ export default function Home() {
                 Curated color library for product and brand work
               </span>
               <div className="max-w-3xl space-y-4">
-                <h1 className="max-w-2xl text-4xl font-semibold tracking-normal text-balance md:text-5xl">
+                <h1 className="max-w-2xl text-4xl font-bold tracking-normal text-balance md:text-5xl">
                   Find a palette that already knows its job.
                 </h1>
                 <p className="text-muted-foreground max-w-2xl text-base leading-7 text-pretty md:text-lg">
