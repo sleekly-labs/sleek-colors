@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import Link from "next/link";
 import { ArrowRight, Search, Sparkles } from "lucide-react";
 
@@ -174,7 +175,7 @@ export default function Home() {
               {categoryShortcuts.map((category, index) => (
                 <Link
                   key={category.slug}
-                  href="#browse"
+                  href={`/category/${category.slug}`}
                   className={cn(
                     "rounded-card border-border hover:bg-muted focus-visible:bg-muted flex min-h-28 flex-col justify-between border p-4 transition-colors"
                   )}
@@ -284,7 +285,9 @@ export default function Home() {
             title="Browse the main palette library."
             description="Search by palette name, category, mood, color family, or HEX value, then refine with shared controls."
           />
-          <PaletteExplorerPreview palettes={browsePreviewPalettes} />
+          <Suspense fallback={null}>
+            <PaletteExplorerPreview palettes={browsePreviewPalettes} />
+          </Suspense>
         </PageContainer>
       </PageSection>
     </>

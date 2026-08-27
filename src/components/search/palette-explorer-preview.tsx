@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { usePathname, useSearchParams } from "next/navigation";
 
 import { GeneralPaletteGrid } from "@/components/palette";
 import type {
@@ -26,23 +27,98 @@ const sortOptions = [
 type PaletteExplorerPreviewProps = {
   initialVisibleCount?: number;
   loadMoreStep?: number;
+  initialQuery?: string;
   palettes: readonly GeneralPalette[];
+  searchParamKeys?: {
+    category: string;
+    colorFamily: string;
+    mood: string;
+    page: string;
+    query: string;
+    sort: string;
+  };
 };
 
 function PaletteExplorerPreview({
   initialVisibleCount = 6,
   loadMoreStep = 3,
-  palettes
+  initialQuery = "",
+  palettes,
+  searchParamKeys
 }: PaletteExplorerPreviewProps) {
-  const [query, setQuery] = useState("");
-  const [sortValue, setSortValue] =
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const [localQuery, setLocalQuery] = useState(initialQuery);
+  const [localSortValue, setLocalSortValue] =
     useState<(typeof sortOptions)[number]["value"]>("featured");
-  const [selectedCategory, setSelectedCategory] =
+  const [localSelectedCategory, setLocalSelectedCategory] =
     useState<PaletteCategory | null>(null);
-  const [selectedMood, setSelectedMood] = useState<PaletteMood | null>(null);
-  const [selectedColorFamily, setSelectedColorFamily] =
+  const [localSelectedMood, setLocalSelectedMood] =
+    useState<PaletteMood | null>(null);
+  const [localSelectedColorFamily, setLocalSelectedColorFamily] =
     useState<ColorFamily | null>(null);
-  const [visibleCount, setVisibleCount] = useState(initialVisibleCount);
+  const [localVisibleCount, setLocalVisibleCount] =
+    useState(initialVisibleCount);
+  const syncUrlState = Boolean(searchParamKeys);
+
+  function updateUrlState(
+    updates: Record<string, string | null | undefined>,
+    options?: { resetPage?: boolean }
+  ) {
+    if (!searchParamKeys) {
+      return;
+    }
+
+    const params = new URLSearchParams(searchParams.toString());
+
+    Object.entries(updates).forEach(([key, value]) => {
+      if (!value) {
+        params.delete(key);
+        return;
+      }
+
+      params.set(key, value);
+    });
+
+    if (options?.resetPage) {
+      params.delete(searchParamKeys.page);
+    }
+
+    const nextSearch = params.toString();
+    const nextUrl = nextSearch ? `${pathname}?${nextSearch}` : pathname;
+
+    window.history.replaceState(null, "", nextUrl);
+  }
+
+  const query = syncUrlState
+    ? (searchParams.get(searchParamKeys!.query) ?? initialQuery)
+    : localQuery;
+  const sortValue = syncUrlState
+    ? ((searchParams.get(searchParamKeys!.sort) as
+        (typeof sortOptions)[number]["value"] | null) ?? "featured")
+    : localSortValue;
+  const selectedCategory = syncUrlState
+    ? ((searchParams.get(
+        searchParamKeys!.category
+      ) as PaletteCategory | null) ?? null)
+    : localSelectedCategory;
+  const selectedMood = syncUrlState
+    ? ((searchParams.get(searchParamKeys!.mood) as PaletteMood | null) ?? null)
+    : localSelectedMood;
+  const selectedColorFamily = syncUrlState
+    ? ((searchParams.get(searchParamKeys!.colorFamily) as ColorFamily | null) ??
+      null)
+    : localSelectedColorFamily;
+  const currentPage = syncUrlState
+    ? Math.max(
+        Number.parseInt(searchParams.get(searchParamKeys!.page) ?? "1", 10) ||
+          1,
+        1
+      )
+    : 1;
+  const visibleCount = syncUrlState
+    ? initialVisibleCount + (currentPage - 1) * loadMoreStep
+    : localVisibleCount;
 
   const filterGroups = useMemo<readonly BrowseFilterGroup[]>(
     () => [
@@ -144,37 +220,87 @@ function PaletteExplorerPreview({
   );
 
   function resetControls() {
-    setQuery("");
-    setSortValue("featured");
-    setSelectedCategory(null);
-    setSelectedMood(null);
-    setSelectedColorFamily(null);
-    setVisibleCount(initialVisibleCount);
+    if (syncUrlState && searchParamKeys) {
+      updateUrlState({
+        [searchParamKeys.category]: null,
+        [searchParamKeys.colorFamily]: null,
+        [searchParamKeys.mood]: null,
+        [searchParamKeys.page]: null,
+        [searchParamKeys.query]: null,
+        [searchParamKeys.sort]: null
+      });
+      return;
+    }
+
+    setLocalQuery("");
+    setLocalSortValue("featured");
+    setLocalSelectedCategory(null);
+    setLocalSelectedMood(null);
+    setLocalSelectedColorFamily(null);
+    setLocalVisibleCount(initialVisibleCount);
   }
 
   function handleFilterChange(groupLabel: string, value: string | null) {
+    if (syncUrlState && searchParamKeys) {
+      if (groupLabel === "Category") {
+        updateUrlState(
+          { [searchParamKeys.category]: value },
+          { resetPage: true }
+        );
+      }
+
+      if (groupLabel === "Mood") {
+        updateUrlState({ [searchParamKeys.mood]: value }, { resetPage: true });
+      }
+
+      if (groupLabel === "Color family") {
+        updateUrlState(
+          { [searchParamKeys.colorFamily]: value },
+          { resetPage: true }
+        );
+      }
+
+      return;
+    }
+
     if (groupLabel === "Category") {
-      setSelectedCategory(value as PaletteCategory | null);
+      setLocalSelectedCategory(value as PaletteCategory | null);
     }
 
     if (groupLabel === "Mood") {
-      setSelectedMood(value as PaletteMood | null);
+      setLocalSelectedMood(value as PaletteMood | null);
     }
 
     if (groupLabel === "Color family") {
-      setSelectedColorFamily(value as ColorFamily | null);
+      setLocalSelectedColorFamily(value as ColorFamily | null);
     }
 
-    setVisibleCount(initialVisibleCount);
+    setLocalVisibleCount(initialVisibleCount);
   }
 
   function handleQueryChange(value: string) {
-    setQuery(value);
-    setVisibleCount(initialVisibleCount);
+    if (syncUrlState && searchParamKeys) {
+      updateUrlState(
+        { [searchParamKeys.query]: value.trim() ? value : null },
+        { resetPage: true }
+      );
+      return;
+    }
+
+    setLocalQuery(value);
+    setLocalVisibleCount(initialVisibleCount);
   }
 
   function handleSortChange(value: string) {
-    setSortValue(value as (typeof sortOptions)[number]["value"]);
+    if (syncUrlState && searchParamKeys) {
+      updateUrlState(
+        { [searchParamKeys.sort]: value === "featured" ? null : value },
+        { resetPage: true }
+      );
+      return;
+    }
+
+    setLocalSortValue(value as (typeof sortOptions)[number]["value"]);
   }
 
   return (
@@ -199,7 +325,16 @@ function PaletteExplorerPreview({
           <GeneralPaletteGrid palettes={visiblePalettes} />
           <LoadMoreControl
             remainingCount={remainingCount}
-            onLoadMore={() => setVisibleCount((count) => count + loadMoreStep)}
+            onLoadMore={() => {
+              if (syncUrlState && searchParamKeys) {
+                updateUrlState({
+                  [searchParamKeys.page]: String(currentPage + 1)
+                });
+                return;
+              }
+
+              setLocalVisibleCount((count) => count + loadMoreStep);
+            }}
           />
         </>
       ) : (

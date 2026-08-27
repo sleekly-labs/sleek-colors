@@ -12,8 +12,8 @@ This file is the execution checklist for the MVP described in `PRD.md`. Update i
 
 ## Current Status
 
-- **Current phase:** Phase 4 - Homepage and Discovery Routes
-- **Next task:** Build `/category/[slug]` pages from the data-driven taxonomy.
+- **Current phase:** Phase 5 - Palette Detail and Website Preview
+- **Next task:** Build statically generated `/palette/[slug]` pages for every published palette.
 - **MVP status:** In progress
 - **Last updated:** 2026-08-27
 
@@ -87,18 +87,18 @@ Goal: deliver the main browsing, search, filtering, and discovery journeys.
 - [x] Add the homepage Website Color Combinations section with a curated subset and View All Website Colors action.
 - [x] Build `/palettes` with published palettes, search, sorting, filters, and pagination or load more.
 - [x] Build `/website-colors` with two-color cards, search, sorting, style/mood/color-family filters, and preview actions.
-- [ ] Build `/category/[slug]` pages from the data-driven taxonomy.
-- [ ] Build `/search` with query support for palette names, tags, categories, moods, and color names.
-- [ ] Reflect search, filter, sort, and pagination state in shareable URLs where appropriate.
-- [ ] Build `/random` to redirect to a random published palette.
-- [ ] Build a concise `/about` page.
-- [ ] Add appropriate not-found and no-results experiences.
+- [x] Build `/category/[slug]` pages from the data-driven taxonomy.
+- [x] Build `/search` with query support for palette names, tags, categories, moods, and color names.
+- [x] Reflect search, filter, sort, and pagination state in shareable URLs where appropriate.
+- [x] Build `/random` to redirect to a random published palette.
+- [x] Build a concise `/about` page.
+- [x] Add appropriate not-found and no-results experiences.
 
 ### Phase 4 Exit Criteria
 
-- [ ] Visitors can browse all published content and reach any palette from the primary discovery routes.
-- [ ] Search and filters combine reliably and produce shareable URLs.
-- [ ] Discovery routes are responsive, keyboard accessible, and useful without an account.
+- [x] Visitors can browse all published content and reach any palette from the primary discovery routes.
+- [x] Search and filters combine reliably and produce shareable URLs.
+- [x] Discovery routes are responsive, keyboard accessible, and useful without an account.
 
 ## Phase 5 - Palette Detail and Website Preview
 

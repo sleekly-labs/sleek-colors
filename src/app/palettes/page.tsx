@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import Link from "next/link";
 import { ArrowRight, Search } from "lucide-react";
 
@@ -89,11 +90,21 @@ export default function PalettesPage() {
             title="Refine the full palette library."
             description="The results update in place as you search, sort, and toggle filters."
           />
-          <PaletteExplorerPreview
-            palettes={palettes}
-            initialVisibleCount={12}
-            loadMoreStep={12}
-          />
+          <Suspense fallback={null}>
+            <PaletteExplorerPreview
+              palettes={palettes}
+              initialVisibleCount={12}
+              loadMoreStep={12}
+              searchParamKeys={{
+                category: "category",
+                colorFamily: "family",
+                mood: "mood",
+                page: "page",
+                query: "q",
+                sort: "sort"
+              }}
+            />
+          </Suspense>
         </PageContainer>
       </PageSection>
     </>

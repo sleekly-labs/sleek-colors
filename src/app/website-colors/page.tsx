@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import Link from "next/link";
 import { ArrowRight, MonitorSmartphone, Search } from "lucide-react";
 
@@ -88,7 +89,19 @@ export default function WebsiteColorsPage() {
             title="Refine the website colors catalog."
             description="Search by name, tag, mood, color family, or HEX value, then filter by style and inspect the preview actions directly from the grid."
           />
-          <WebsitePaletteExplorer palettes={palettes} />
+          <Suspense fallback={null}>
+            <WebsitePaletteExplorer
+              palettes={palettes}
+              searchParamKeys={{
+                colorFamily: "family",
+                mood: "mood",
+                page: "page",
+                query: "q",
+                sort: "sort",
+                style: "style"
+              }}
+            />
+          </Suspense>
         </PageContainer>
       </PageSection>
     </>
