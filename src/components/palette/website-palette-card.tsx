@@ -185,13 +185,15 @@ function WebsitePaletteCard({
               <Copy />
               <span>{copiedPalette ? "Palette copied" : "Copy palette"}</span>
             </Button>
-            <Link
-              href={previewHref}
-              className={buttonLinkClassName({ size: "sm" })}
-            >
-              <span>Try on website</span>
-              <ExternalLink />
-            </Link>
+            {palette.supportsWebsitePreview ? (
+              <Link
+                href={previewHref}
+                className={buttonLinkClassName({ size: "sm" })}
+              >
+                <span>Try on website</span>
+                <ExternalLink />
+              </Link>
+            ) : null}
           </div>
         </div>
       </div>

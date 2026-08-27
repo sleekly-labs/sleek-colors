@@ -202,6 +202,32 @@ function PaletteDetailContent({
             ))}
           </div>
 
+          {palette.paletteType === "website" ? (
+            <div className="grid gap-3 sm:grid-cols-2">
+              {[
+                { hex: palette.primaryColor, label: "Primary" },
+                { hex: palette.secondaryColor, label: "Secondary" }
+              ].map((role) => (
+                <div
+                  key={role.label}
+                  className="bg-card rounded-card border-border flex items-center gap-3 border p-4"
+                >
+                  <span
+                    className="size-10 shrink-0 rounded-md border"
+                    style={{ backgroundColor: role.hex }}
+                    aria-hidden="true"
+                  />
+                  <div className="min-w-0">
+                    <p className="text-muted-foreground text-xs font-medium uppercase">
+                      {role.label} color
+                    </p>
+                    <p className="mt-1 text-sm font-semibold">{role.hex}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : null}
+
           <div className="grid gap-3">
             {palette.colors.map((color) => {
               const isCopied = copiedHex === color.hex;

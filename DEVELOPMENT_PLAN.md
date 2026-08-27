@@ -12,8 +12,8 @@ This file is the execution checklist for the MVP described in `PRD.md`. Update i
 
 ## Current Status
 
-- **Current phase:** Phase 5 - Palette Detail and Website Preview
-- **Next task:** Clearly identify Primary and Secondary roles on website palette detail pages.
+- **Current phase:** Phase 6 - SEO, Sharing, Analytics, and Supporting Pages
+- **Next task:** Generate unique titles, descriptions, canonical URLs, and social metadata for core and palette routes.
 - **MVP status:** In progress
 - **Last updated:** 2026-08-27
 
@@ -108,21 +108,21 @@ Goal: complete the high-value palette evaluation, copying, sharing, and website-
 - [x] Show palette name, large preview, interactive swatches, HEX values, category, moods, tags, and optional dates.
 - [x] Add individual-copy, full-palette-copy, and share actions with lightweight feedback.
 - [x] Add related palettes based on explicit, deterministic category, mood, tag, or color-family signals.
-- [ ] Clearly identify Primary and Secondary roles on website palette detail pages.
-- [ ] Add Try on Website actions only to palettes that support the preview.
-- [ ] Build `/preview/[palette-slug]` with a realistic sample landing page and small dashboard/stat section.
-- [ ] Apply Primary to major actions, links, selected states, and key accents.
-- [ ] Apply Secondary to supporting actions, badges, highlights, and complementary elements.
-- [ ] Keep text and background neutrals controlled by the preview template for legibility.
-- [ ] Display and copy the active Primary and Secondary HEX values in the preview.
-- [ ] Implement temporary Swap Colors and Reset actions without mutating source data.
-- [ ] Verify the preview updates immediately and works at desktop and mobile widths.
+- [x] Clearly identify Primary and Secondary roles on website palette detail pages.
+- [x] Add Try on Website actions only to palettes that support the preview.
+- [x] Build `/preview/[palette-slug]` with a realistic sample landing page and small dashboard/stat section.
+- [x] Apply Primary to major actions, links, selected states, and key accents.
+- [x] Apply Secondary to supporting actions, badges, highlights, and complementary elements.
+- [x] Keep text and background neutrals controlled by the preview template for legibility.
+- [x] Display and copy the active Primary and Secondary HEX values in the preview.
+- [x] Implement temporary Swap Colors and Reset actions without mutating source data.
+- [x] Verify the preview updates immediately and works at desktop and mobile widths.
 
 ### Phase 5 Exit Criteria
 
-- [ ] Every published palette has a permanent detail URL and complete copy interactions.
-- [ ] Website palettes open in a realistic preview with correct, clearly labeled color roles.
-- [ ] Swap and Reset are deterministic, accessible, and do not change static palette data.
+- [x] Every published palette has a permanent detail URL and complete copy interactions.
+- [x] Website palettes open in a realistic preview with correct, clearly labeled color roles.
+- [x] Swap and Reset are deterministic, accessible, and do not change static palette data.
 
 ## Phase 6 - SEO, Sharing, Analytics, and Supporting Pages
 
