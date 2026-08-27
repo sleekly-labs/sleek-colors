@@ -1,13 +1,12 @@
-import type { Metadata } from "next";
-import { DM_Sans, Sora } from "next/font/google";
-
 import {
   MainRegion,
   PageShell,
   SiteFooter,
   SiteHeader
 } from "@/components/layout";
-
+import { Analytics } from "@vercel/analytics/next";
+import type { Metadata } from "next";
+import { DM_Sans, Sora } from "next/font/google";
 import "./globals.css";
 
 const dmSans = DM_Sans({
@@ -39,6 +38,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <MainRegion>{children}</MainRegion>
           <SiteFooter />
         </PageShell>
+        <Analytics />
       </body>
     </html>
   );
