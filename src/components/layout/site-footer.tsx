@@ -1,8 +1,7 @@
-import Link from "next/link";
-
-import { getGeneralPalettes, getWebsitePalettes } from "@/data";
 import { cn } from "@/lib/utils";
-
+import { ExternalLink } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 import { PageContainer } from "./primitives";
 
 const footerGroups = [
@@ -29,30 +28,26 @@ type SiteFooterProps = {
 };
 
 function SiteFooter({ className }: SiteFooterProps) {
-  const generalCount = getGeneralPalettes("published").length;
-  const websiteCount = getWebsitePalettes("published").length;
-
   return (
     <footer className={cn("border-t", className)}>
       <PageContainer className="flex flex-col gap-10 py-10">
         <div className="grid gap-10 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)]">
           <div className="flex max-w-xl flex-col gap-4">
             <div className="flex flex-col gap-1">
-              <Link href="/" className="text-base font-semibold">
-                Sleek Colors
+              <Link href="/" className="flex w-28 sm:w-32">
+                <Image
+                  src="/images/full-logo.png"
+                  alt="Sleek Colors"
+                  width={1448}
+                  height={1086}
+                  sizes="(min-width: 640px) 128px, 112px"
+                  className="h-auto w-full"
+                />
               </Link>
               <p className="text-muted-foreground text-sm">
                 Curated palette library for product, brand, editorial, and
                 website color decisions.
               </p>
-            </div>
-            <div className="flex flex-wrap gap-3 text-sm">
-              <span className="bg-muted text-muted-foreground rounded-full px-3 py-1.5">
-                {generalCount} general palettes
-              </span>
-              <span className="bg-muted text-muted-foreground rounded-full px-3 py-1.5">
-                {websiteCount} website combinations
-              </span>
             </div>
           </div>
           <div className="grid gap-8 sm:grid-cols-2">
@@ -78,8 +73,21 @@ function SiteFooter({ className }: SiteFooterProps) {
           </div>
         </div>
         <div className="text-muted-foreground flex flex-col gap-2 border-t pt-4 text-sm sm:flex-row sm:items-center sm:justify-between">
-          <p>Sleek Colors MVP</p>
-          <p>No social or contact links until real destinations exist.</p>
+          <p>
+            &copy; {new Date().getFullYear()} Sleek Colors. All Rights Reserved.
+          </p>
+          <nav aria-label="Social links" className="flex items-center gap-3">
+            <a
+              href="https://github.com/sleekly-labs/sleek-colors"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Sleek Colors on GitHub (opens in a new tab)"
+              className="hover:text-foreground focus-visible:ring-ring inline-flex items-center gap-2 rounded-md py-1 text-sm font-medium transition-colors outline-none focus-visible:ring-3"
+            >
+              <span>GitHub</span>
+              <ExternalLink className="size-3.5" />
+            </a>
+          </nav>
         </div>
       </PageContainer>
     </footer>

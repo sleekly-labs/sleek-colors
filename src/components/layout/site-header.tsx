@@ -1,5 +1,6 @@
-import Link from "next/link";
 import { Search, Shuffle } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 
 import { buttonLinkClassName } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -25,20 +26,18 @@ function SiteHeader({ className }: SiteHeaderProps) {
         className
       )}
     >
-      <PageContainer className="flex flex-col gap-4 py-4">
+      <PageContainer className="flex flex-col gap-2 py-2">
         <div className="flex items-center justify-between gap-4">
           <div className="flex min-w-0 flex-1 items-center gap-4">
-            <Link
-              href="/"
-              className="flex min-w-0 flex-col"
-              aria-label="Sleek Colors home"
-            >
-              <span className="text-base font-semibold tracking-normal">
-                Sleek Colors
-              </span>
-              <span className="text-muted-foreground text-xs">
-                Curated palette library
-              </span>
+            <Link href="/" className="flex w-20 shrink-0 sm:w-24 lg:w-28">
+              <Image
+                src="/images/full-logo.png"
+                alt="Sleek Colors"
+                width={1448}
+                height={1086}
+                sizes="(min-width: 1024px) 144px, (min-width: 640px) 128px, 112px"
+                className="h-auto w-full"
+              />
             </Link>
             <nav
               aria-label="Primary"
