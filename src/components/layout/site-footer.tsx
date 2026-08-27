@@ -74,7 +74,16 @@ function SiteFooter({ className }: SiteFooterProps) {
         </div>
         <div className="text-muted-foreground flex flex-col gap-2 border-t pt-4 text-sm sm:flex-row sm:items-center sm:justify-between">
           <p>
-            &copy; {new Date().getFullYear()} Sleek Colors. All Rights Reserved.
+            &copy; {new Date().getFullYear()}{" "}
+            <a
+              href="https://sleekly-tech.vercel.app"
+              target="_blank"
+              rel="noreferrer"
+              className="hover:text-foreground focus-visible:ring-ring rounded-sm font-medium transition-colors outline-none focus-visible:ring-3"
+            >
+              Sleekly
+            </a>
+            . All Rights Reserved.
           </p>
           <nav aria-label="Social links" className="flex items-center gap-3">
             <a
