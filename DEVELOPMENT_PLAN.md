@@ -13,7 +13,7 @@ This file is the execution checklist for the MVP described in `PRD.md`. Update i
 ## Current Status
 
 - **Current phase:** Phase 5 - Palette Detail and Website Preview
-- **Next task:** Build statically generated `/palette/[slug]` pages for every published palette.
+- **Next task:** Clearly identify Primary and Secondary roles on website palette detail pages.
 - **MVP status:** In progress
 - **Last updated:** 2026-08-27
 
@@ -104,10 +104,10 @@ Goal: deliver the main browsing, search, filtering, and discovery journeys.
 
 Goal: complete the high-value palette evaluation, copying, sharing, and website-preview flows.
 
-- [ ] Build statically generated `/palette/[slug]` pages for every published palette.
-- [ ] Show palette name, large preview, interactive swatches, HEX values, category, moods, tags, and optional dates.
-- [ ] Add individual-copy, full-palette-copy, and share actions with lightweight feedback.
-- [ ] Add related palettes based on explicit, deterministic category, mood, tag, or color-family signals.
+- [x] Build statically generated `/palette/[slug]` pages for every published palette.
+- [x] Show palette name, large preview, interactive swatches, HEX values, category, moods, tags, and optional dates.
+- [x] Add individual-copy, full-palette-copy, and share actions with lightweight feedback.
+- [x] Add related palettes based on explicit, deterministic category, mood, tag, or color-family signals.
 - [ ] Clearly identify Primary and Secondary roles on website palette detail pages.
 - [ ] Add Try on Website actions only to palettes that support the preview.
 - [ ] Build `/preview/[palette-slug]` with a realistic sample landing page and small dashboard/stat section.

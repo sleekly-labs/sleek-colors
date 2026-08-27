@@ -3,9 +3,13 @@ import { ArrowRight } from "lucide-react";
 import { notFound } from "next/navigation";
 
 import { PageContainer, PageSection, SectionHeader } from "@/components/layout";
-import { PaletteDetailContent } from "@/components/palette";
+import {
+  GeneralPaletteGrid,
+  PaletteDetailContent,
+  WebsitePaletteGrid
+} from "@/components/palette";
 import { buttonLinkClassName } from "@/components/ui/button";
-import { getPaletteBySlug, getPalettes } from "@/data";
+import { getPaletteBySlug, getPalettes, getRelatedPalettes } from "@/data";
 
 export function generateStaticParams() {
   return getPalettes("published").map((palette) => ({
@@ -24,6 +28,14 @@ export default async function PalettePage({
   if (!palette || palette.status !== "published") {
     notFound();
   }
+
+  const relatedPalettes = getRelatedPalettes(palette);
+  const relatedGeneralPalettes = relatedPalettes.filter(
+    (relatedPalette) => relatedPalette.paletteType === "general"
+  );
+  const relatedWebsitePalettes = relatedPalettes.filter(
+    (relatedPalette) => relatedPalette.paletteType === "website"
+  );
 
   return (
     <>
@@ -66,6 +78,25 @@ export default async function PalettePage({
           <PaletteDetailContent palette={palette} />
         </PageContainer>
       </PageSection>
+
+      {relatedGeneralPalettes.length > 0 ||
+      relatedWebsitePalettes.length > 0 ? (
+        <PageSection spacing="compact" className="border-t">
+          <PageContainer className="flex flex-col gap-8">
+            <SectionHeader
+              eyebrow="Keep exploring"
+              title="Related palettes"
+              description="Curated by shared categories, moods, tags, and color families."
+            />
+            {relatedGeneralPalettes.length > 0 ? (
+              <GeneralPaletteGrid palettes={relatedGeneralPalettes} />
+            ) : null}
+            {relatedWebsitePalettes.length > 0 ? (
+              <WebsitePaletteGrid palettes={relatedWebsitePalettes} />
+            ) : null}
+          </PageContainer>
+        </PageSection>
+      ) : null}
     </>
   );
 }

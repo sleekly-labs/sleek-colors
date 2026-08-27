@@ -6,6 +6,7 @@ export {
   getPaletteBySlug,
   getPaletteCatalog,
   getPalettes,
+  getRelatedPalettes,
   getWebsitePalettes
 } from "./catalog";
 export type { PaletteCatalog } from "./catalog";

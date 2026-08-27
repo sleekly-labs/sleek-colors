@@ -1,6 +1,6 @@
 "use client";
 
-import { Copy, Link2 } from "lucide-react";
+import { Copy, Link2, Share2 } from "lucide-react";
 import { useId, useState } from "react";
 
 import { Button } from "@/components/ui/button";
@@ -15,6 +15,13 @@ type PaletteDetailContentProps = {
   palette: Palette;
 };
 
+function formatPaletteDate(value: string) {
+  return new Intl.DateTimeFormat("en-US", {
+    dateStyle: "medium",
+    timeZone: "UTC"
+  }).format(new Date(`${value}T00:00:00Z`));
+}
+
 function PaletteDetailContent({
   className,
   palette
@@ -23,6 +30,38 @@ function PaletteDetailContent({
   const [copiedHex, setCopiedHex] = useState<string | null>(null);
   const [copiedPalette, setCopiedPalette] = useState(false);
   const [statusMessage, setStatusMessage] = useState("");
+  const metadataItems = [
+    {
+      label: "Category",
+      value: palette.categories.join(", ")
+    },
+    {
+      label: "Mood",
+      value: palette.moods.join(", ")
+    },
+    {
+      label: "Color family",
+      value: palette.colorFamilies.join(", ")
+    },
+    ...(palette.createdAt
+      ? [
+          {
+            label: "Published",
+            value: formatPaletteDate(palette.createdAt),
+            dateTime: palette.createdAt
+          }
+        ]
+      : []),
+    ...(palette.updatedAt && palette.updatedAt !== palette.createdAt
+      ? [
+          {
+            label: "Updated",
+            value: formatPaletteDate(palette.updatedAt),
+            dateTime: palette.updatedAt
+          }
+        ]
+      : [])
+  ];
 
   async function handleCopy(hex: string) {
     const result = await copyHexToClipboard(hex);
@@ -67,6 +106,29 @@ function PaletteDetailContent({
     } catch {
       setStatusMessage("Could not copy palette link.");
     }
+  }
+
+  async function handleShare() {
+    const href = window.location.href;
+
+    if (typeof navigator.share === "function") {
+      try {
+        await navigator.share({
+          title: palette.name,
+          text: palette.description ?? "Explore this curated color palette.",
+          url: href
+        });
+        setStatusMessage("Palette shared.");
+        return;
+      } catch (error) {
+        if (error instanceof DOMException && error.name === "AbortError") {
+          setStatusMessage("Share canceled.");
+          return;
+        }
+      }
+    }
+
+    await handleCopyLink();
   }
 
   return (
@@ -123,28 +185,18 @@ function PaletteDetailContent({
 
       <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_20rem]">
         <div className="grid gap-6">
-          <div className="grid gap-3 sm:grid-cols-3">
-            {[
-              {
-                label: "Category",
-                value: palette.categories.join(", ")
-              },
-              {
-                label: "Mood",
-                value: palette.moods.join(", ")
-              },
-              {
-                label: "Color family",
-                value: palette.colorFamilies.join(", ")
-              }
-            ].map((item) => (
+          <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+            {metadataItems.map((item) => (
               <div
                 key={item.label}
                 className="bg-card rounded-card border-border border p-4"
               >
                 <p className="text-muted-foreground text-sm">{item.label}</p>
                 <p className="mt-2 text-sm font-medium text-balance">
-                  {item.value}
+                  {"dateTime" in item ? (
+                    <time dateTime={item.dateTime}>{item.value}</time>
+                  ) : null}
+                  {"dateTime" in item ? null : item.value}
                 </p>
               </div>
             ))}
@@ -205,6 +257,10 @@ function PaletteDetailContent({
           <Button variant="outline" onClick={() => void handleCopyLink()}>
             <Link2 />
             <span>Copy link</span>
+          </Button>
+          <Button variant="outline" onClick={() => void handleShare()}>
+            <Share2 />
+            <span>Share palette</span>
           </Button>
           <div className="space-y-2 pt-2">
             <p className="text-muted-foreground text-sm">Tags</p>

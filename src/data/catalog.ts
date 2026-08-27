@@ -126,6 +126,49 @@ export function getPaletteBySlug(slug: string): Palette | undefined {
   return paletteCatalog.palettes.find((palette) => palette.slug === slug);
 }
 
+export function getRelatedPalettes(
+  palette: Palette,
+  limit = 3
+): readonly Palette[] {
+  if (limit <= 0) {
+    return [];
+  }
+
+  return paletteCatalog.palettes
+    .filter(
+      (candidate) =>
+        candidate.status === "published" && candidate.slug !== palette.slug
+    )
+    .map((candidate) => {
+      const categoryMatches = candidate.categories.filter((category) =>
+        palette.categories.includes(category)
+      ).length;
+      const moodMatches = candidate.moods.filter((mood) =>
+        palette.moods.includes(mood)
+      ).length;
+      const tagMatches = candidate.tags.filter((tag) =>
+        palette.tags.includes(tag)
+      ).length;
+      const familyMatches = candidate.colorFamilies.filter((family) =>
+        palette.colorFamilies.includes(family)
+      ).length;
+
+      return {
+        candidate,
+        score:
+          categoryMatches * 4 + moodMatches * 3 + tagMatches * 2 + familyMatches
+      };
+    })
+    .filter(({ score }) => score > 0)
+    .sort(
+      (left, right) =>
+        right.score - left.score ||
+        left.candidate.slug.localeCompare(right.candidate.slug)
+    )
+    .slice(0, limit)
+    .map(({ candidate }) => candidate);
+}
+
 export function getCategoryDefinitions(): readonly CategoryDefinition[] {
   return paletteCatalog.categories;
 }
