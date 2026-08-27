@@ -78,7 +78,7 @@ export type BasePalette = {
   categories: PaletteCategory[];
   moods: PaletteMood[];
   tags: string[];
-  colorFamilies?: ColorFamily[];
+  colorFamilies: ColorFamily[];
   isFeatured: boolean;
   status: PaletteStatus;
   createdAt?: IsoDateString;

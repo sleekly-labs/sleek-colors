@@ -12,9 +12,9 @@ This file is the execution checklist for the MVP described in `PRD.md`. Update i
 
 ## Current Status
 
-- **Current phase:** Phase 1 - Foundation and architecture
-- **Next task:** Create static data modules for general palettes, website palettes, categories, and moods.
-- **MVP status:** Not started
+- **Current phase:** Phase 4 - Homepage and Discovery Routes
+- **Next task:** Build `/category/[slug]` pages from the data-driven taxonomy.
+- **MVP status:** In progress
 - **Last updated:** 2026-08-27
 
 ## Phase 1 - Foundation and Architecture
@@ -43,50 +43,50 @@ Goal: create a validated, replaceable static data layer for all palette content.
 - [x] Define centralized TypeScript types for palettes, colors, categories, moods, color families, and website palette roles.
 - [x] Enforce general palette rules: 3-8 colors, unique slug, published status, and normalized uppercase HEX values.
 - [x] Enforce website palette rules: exactly two colors, explicit Primary and Secondary values, `paletteType: "website"`, and website preview enabled.
-- [ ] Create static data modules for general palettes, website palettes, categories, and moods.
-- [ ] Add a small data access layer so UI components do not depend on the physical data-file layout.
-- [ ] Add validation for duplicate IDs/slugs, invalid HEX values, missing taxonomy values, and website palette invariants.
-- [ ] Assign dominant color families manually for version 1 filtering.
-- [ ] Seed representative development data covering every planned category, mood, color family, and palette type.
-- [ ] Expand launch content to at least 100 curated general palettes.
-- [ ] Expand launch content to at least 30 curated website color combinations.
-- [ ] Review seed data for quality and remove near-duplicate palettes.
+- [x] Create static data modules for general palettes, website palettes, categories, and moods.
+- [x] Add a small data access layer so UI components do not depend on the physical data-file layout.
+- [x] Add validation for duplicate IDs/slugs, invalid HEX values, missing taxonomy values, and website palette invariants.
+- [x] Assign dominant color families manually for version 1 filtering.
+- [x] Seed representative development data covering every planned category, mood, color family, and palette type.
+- [x] Expand launch content to at least 100 curated general palettes.
+- [x] Expand launch content to at least 30 curated website color combinations.
+- [x] Review seed data for quality and remove near-duplicate palettes.
 
 ### Phase 2 Exit Criteria
 
-- [ ] Static data is type-safe, validated, and independent from presentation components.
-- [ ] Both palette types have enough representative data to build and test every MVP flow.
+- [x] Static data is type-safe, validated, and independent from presentation components.
+- [x] Both palette types have enough representative data to build and test every MVP flow.
 - [ ] The launch content targets are tracked and can be verified automatically.
 
 ## Phase 3 - Shared Product Components and Interactions
 
 Goal: build the reusable UI and interaction layer used across palette experiences.
 
-- [ ] Build the site header with Explore, Categories, Random, About, Search, and optional theme controls.
-- [ ] Build the footer with product links and only verified contact or social destinations.
-- [ ] Build the general palette card with accessible color-copy interactions and a separate detail-page link target.
-- [ ] Build the two-color website palette card with clear Primary and Secondary labels, copy controls, and Try on Website action.
-- [ ] Build reusable palette grids with stable responsive layouts for desktop, tablet, and mobile.
-- [ ] Implement a shared Clipboard API utility that consistently copies uppercase HEX values.
-- [ ] Add lightweight, accessible copy confirmation for individual colors.
-- [ ] Add full-palette copying in the PRD's newline-separated HEX format.
-- [ ] Build shared search, sorting, filter, pagination or load-more, empty-state, and results-summary controls.
-- [ ] Verify all controls work with keyboard, pointer, and touch input without relying on hover.
+- [x] Build the site header with Explore, Categories, Random, About, Search, and optional theme controls.
+- [x] Build the footer with product links and only verified contact or social destinations.
+- [x] Build the general palette card with accessible color-copy interactions and a separate detail-page link target.
+- [x] Build the two-color website palette card with clear Primary and Secondary labels, copy controls, and Try on Website action.
+- [x] Build reusable palette grids with stable responsive layouts for desktop, tablet, and mobile.
+- [x] Implement a shared Clipboard API utility that consistently copies uppercase HEX values.
+- [x] Add lightweight, accessible copy confirmation for individual colors.
+- [x] Add full-palette copying in the PRD's newline-separated HEX format.
+- [x] Build shared search, sorting, filter, pagination or load-more, empty-state, and results-summary controls.
+- [x] Verify all controls work with keyboard, pointer, and touch input without relying on hover.
 
 ### Phase 3 Exit Criteria
 
-- [ ] Shared components cover both general and website palettes without duplicating core behavior.
-- [ ] Copy actions provide immediate, accessible feedback.
-- [ ] Components remain usable and stable at common mobile and desktop widths.
+- [x] Shared components cover both general and website palettes without duplicating core behavior.
+- [x] Copy actions provide immediate, accessible feedback.
+- [x] Components remain usable and stable at common mobile and desktop widths.
 
 ## Phase 4 - Homepage and Discovery Routes
 
 Goal: deliver the main browsing, search, filtering, and discovery journeys.
 
-- [ ] Build the homepage with a concise hero, search, featured palettes, category or mood shortcuts, and main palette grid.
-- [ ] Add the homepage Website Color Combinations section with a curated subset and View All Website Colors action.
-- [ ] Build `/palettes` with published palettes, search, sorting, filters, and pagination or load more.
-- [ ] Build `/website-colors` with two-color cards, search, sorting, style/mood/color-family filters, and preview actions.
+- [x] Build the homepage with a concise hero, search, featured palettes, category or mood shortcuts, and main palette grid. Remember to use `frontend-design` skill while developing UIs.
+- [x] Add the homepage Website Color Combinations section with a curated subset and View All Website Colors action.
+- [x] Build `/palettes` with published palettes, search, sorting, filters, and pagination or load more.
+- [x] Build `/website-colors` with two-color cards, search, sorting, style/mood/color-family filters, and preview actions.
 - [ ] Build `/category/[slug]` pages from the data-driven taxonomy.
 - [ ] Build `/search` with query support for palette names, tags, categories, moods, and color names.
 - [ ] Reflect search, filter, sort, and pagination state in shareable URLs where appropriate.
@@ -213,22 +213,3 @@ Goal: deploy the frontend-only MVP and verify the real production experience.
 - Automatic dominant-color calculation and approximate color or HEX search
 - User-site URL previews, browser extensions, embed scripts, and additional preview templates
 - Dynamic palette Open Graph image generation, unless approved during Phase 6
-
-## Progress Log
-
-| Date       | Phase    | Update                                                                                                                                                                                                                                         | Verification                                                                                                                                                                                                        |
-| ---------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 2026-08-27 | Planning | Created the initial PRD-derived development plan.                                                                                                                                                                                              | Reviewed against `PRD.md`; no product code changed.                                                                                                                                                                 |
-| 2026-08-27 | Phase 1  | Audited the generated Next.js starter, dependencies, scripts, existing routes, PRD route gaps, target structure, and baseline quality commands.                                                                                                | `npm.cmd run lint` passed; `npx.cmd tsc --noEmit` passed; `npm.cmd run build` failed because `next/font/google` could not fetch Geist fonts from Google Fonts in this environment.                                  |
-| 2026-08-27 | Phase 1  | Read and recorded local Next.js 16.3.3 documentation implications for App Router structure, pages, layouts, dynamic routes, static params, metadata, Server and Client Components, CSS, fonts, `src/`, and TypeScript.                         | Documentation review completed; no application code changed.                                                                                                                                                        |
-| 2026-08-27 | Phase 1  | Adopted `src/` source layout by moving the App Router to `src/app` and mapping `@/*` to `./src/*`.                                                                                                                                             | `npm.cmd run lint` passed; `npx.cmd next typegen` passed; `npx.cmd tsc --noEmit` passed after route type generation; `npm.cmd run build` still fails on the known `next/font/google` network fetch for Geist fonts. |
-| 2026-08-27 | Phase 1  | Configured shadcn/ui with Tailwind CSS v4, `components.json`, Base UI, lucide icons, CSS variables, `@/components/ui`, `@/lib/utils`, and the initial `Button` component.                                                                      | `npm.cmd run lint` passed; `npx.cmd tsc --noEmit` passed; `npm.cmd run build` still fails on the known `next/font/google` network fetch for Geist fonts.                                                            |
-| 2026-08-27 | Phase 1  | Established neutral design tokens for color, typography, spacing, borders, focus states, radius, and restrained shadows; replaced generated Google font imports with system font tokens.                                                       | `npm.cmd run lint` passed; `npx.cmd tsc --noEmit` passed; `npm.cmd run build` passed.                                                                                                                               |
-| 2026-08-27 | Phase 1  | Added shared layout primitives and responsive page-width conventions for page shell, main region, page containers, sections, and section headers.                                                                                              | `npm.cmd run lint` passed; `npx.cmd tsc --noEmit` passed; `npm.cmd run build` passed.                                                                                                                               |
-| 2026-08-27 | Phase 1  | Installed Prettier and `prettier-plugin-tailwindcss`, added formatting scripts, added a `quality` script, and documented that a real `test` script will be added when Phase 7 introduces tests.                                                | `npm.cmd run format` passed; `npm.cmd run quality` passed.                                                                                                                                                          |
-| 2026-08-27 | Phase 1  | Recorded the MVP dark mode decision: no dark mode and no theme toggle in version 1.                                                                                                                                                            | Reviewed PRD section 20 and existing foundation; no application code changed.                                                                                                                                       |
-| 2026-08-27 | Phase 1  | Confirmed the agreed baseline quality commands now pass through the single `quality` script.                                                                                                                                                   | `npm.cmd run quality` passed, including lint, typecheck, format check, and production build.                                                                                                                        |
-| 2026-08-27 | Planning | Removed `DEVELOPMENT_AUDIT.md` and deleted `README.md` files under `src/**` so project tracking stays centralized in this plan and implementation directories stay code-focused.                                                               | `npm.cmd run format` passed; `npm.cmd run quality` passed.                                                                                                                                                          |
-| 2026-08-27 | Phase 2  | Added centralized palette and taxonomy types, including discriminated `general` and `website` palette unions, `HexColor`, `PaletteColor`, category/mood/color-family unions, and website palette role types.                                   | `npm.cmd run format` passed; `npm.cmd run quality` passed.                                                                                                                                                          |
-| 2026-08-27 | Phase 2  | Added runtime general-palette validation helpers for 3-8 colors, lowercase hyphenated slugs, valid draft/published status, and uppercase 6-digit HEX normalization.                                                                            | `npm.cmd run format` passed; `npm.cmd run quality` passed.                                                                                                                                                          |
-| 2026-08-27 | Phase 2  | Added website-palette normalization and validation helpers for exactly two colors, required `primaryColor` and `secondaryColor`, `paletteType: "website"`, `supportsWebsitePreview: true`, and role colors present in the main `colors` array. | `npm.cmd run format` passed; `npm.cmd run quality` passed.                                                                                                                                                          |

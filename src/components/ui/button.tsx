@@ -55,4 +55,12 @@ function Button({
   );
 }
 
-export { Button, buttonVariants };
+function buttonLinkClassName({
+  className,
+  size = "default",
+  variant = "default"
+}: VariantProps<typeof buttonVariants> & { className?: string }) {
+  return cn(buttonVariants({ variant, size, className }));
+}
+
+export { Button, buttonLinkClassName, buttonVariants };

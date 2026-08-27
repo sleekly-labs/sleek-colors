@@ -15,6 +15,7 @@ export type PaletteValidationIssueCode =
   | "invalid-slug"
   | "invalid-color-count"
   | "invalid-hex"
+  | "missing-color-family"
   | "missing-primary-color"
   | "missing-secondary-color"
   | "invalid-preview-support"
@@ -121,6 +122,15 @@ export function validateGeneralPalette(
     }
   });
 
+  if (normalizedPalette.colorFamilies.length === 0) {
+    issues.push({
+      code: "missing-color-family",
+      message:
+        "Palettes must define at least one dominant color family for version 1 filtering.",
+      path: "colorFamilies"
+    });
+  }
+
   if (issues.length > 0) {
     return { ok: false, issues };
   }
@@ -179,6 +189,15 @@ export function validateWebsitePalette(
       });
     }
   });
+
+  if (normalizedPalette.colorFamilies.length === 0) {
+    issues.push({
+      code: "missing-color-family",
+      message:
+        "Palettes must define at least one dominant color family for version 1 filtering.",
+      path: "colorFamilies"
+    });
+  }
 
   if (!normalizedPalette.primaryColor) {
     issues.push({
