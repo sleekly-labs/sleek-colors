@@ -25,4 +25,30 @@ describe("published route coverage", () => {
     ).toBe(true);
     expect(getPalettes("draft")).toHaveLength(0);
   });
+
+  it("includes the featured launch website combinations", () => {
+    const websitePalettes = getWebsitePalettes("published");
+    const requestedSlugs = [
+      "cyber-grape-acid-lime",
+      "raspberry-pale-sky",
+      "quantum-blue-ice-glass",
+      "deep-graphite-lime-compute",
+      "blueberry-cream-soda",
+      "cyber-teal-aqua-foam",
+      "neon-orange-porcelain",
+      "forest-graphite-acid-mint",
+      "signal-violet-mist-gray",
+      "inkberry-peach",
+      "prompt-blue-ai-green",
+      "clay-brown-soft-butter"
+    ];
+
+    expect(
+      requestedSlugs.every((slug) =>
+        websitePalettes.some(
+          (palette) => palette.slug === slug && palette.isFeatured
+        )
+      )
+    ).toBe(true);
+  });
 });

@@ -184,6 +184,93 @@ function WebsitePreview({ palette }: WebsitePreviewProps) {
               </article>
             ))}
           </section>
+
+          <section
+            id="metrics"
+            className="grid gap-6 border-t px-5 py-10 sm:px-10 lg:grid-cols-[1.15fr_0.85fr] lg:px-16"
+          >
+            <div>
+              <div className="flex items-end justify-between gap-4">
+                <div>
+                  <p className="text-xs font-semibold tracking-[0.16em] text-[var(--preview-primary)] uppercase">
+                    Product workspace
+                  </p>
+                  <h2 className="mt-2 text-2xl font-semibold tracking-tight text-[var(--preview-ink)]">
+                    Keep the team in sync.
+                  </h2>
+                </div>
+                <span className="hidden rounded-full bg-[var(--preview-secondary)]/25 px-2.5 py-1 text-xs font-medium text-slate-800 sm:inline-flex">
+                  3 updates
+                </span>
+              </div>
+              <div className="mt-5 divide-y rounded-lg bg-[var(--preview-panel)] px-4 ring-1 ring-slate-200">
+                {[
+                  ["Design tokens synced", "Just now", "Complete"],
+                  ["Checkout flow reviewed", "18 min ago", "In review"],
+                  ["Mobile pass completed", "Yesterday", "Complete"]
+                ].map(([title, time, status], index) => (
+                  <div key={title} className="flex items-center gap-3 py-4">
+                    <span
+                      className="flex size-8 shrink-0 items-center justify-center rounded-full text-xs font-bold"
+                      style={{
+                        backgroundColor:
+                          index === 1 ? `${secondary}35` : `${primary}18`,
+                        color: index === 1 ? secondary : primary
+                      }}
+                    >
+                      {index + 1}
+                    </span>
+                    <div className="min-w-0 flex-1">
+                      <p className="truncate text-sm font-medium text-[var(--preview-ink)]">
+                        {title}
+                      </p>
+                      <p className="mt-0.5 text-xs text-[var(--preview-muted)]">
+                        {time}
+                      </p>
+                    </div>
+                    <span className="text-xs font-medium text-[var(--preview-muted)]">
+                      {status}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="rounded-lg bg-[var(--preview-panel)] p-5 ring-1 ring-slate-200">
+              <div className="flex items-center justify-between gap-3">
+                <h2 className="font-semibold text-[var(--preview-ink)]">
+                  Launch readiness
+                </h2>
+                <span className="text-sm font-semibold text-[var(--preview-primary)]">
+                  82%
+                </span>
+              </div>
+              <div className="mt-4 h-2 rounded-full bg-slate-100">
+                <div className="h-2 w-[82%] rounded-full bg-[var(--preview-primary)]" />
+              </div>
+              <ul className="mt-5 space-y-3 text-sm text-[var(--preview-muted)]">
+                {[
+                  "Core flows mapped",
+                  "Content review",
+                  "Analytics connected"
+                ].map((item, index) => (
+                  <li key={item} className="flex items-center gap-2">
+                    <span
+                      className="flex size-5 items-center justify-center rounded-full"
+                      style={{
+                        backgroundColor:
+                          index < 2 ? `${secondary}45` : "#e2e8f0",
+                        color: index < 2 ? "#334155" : "#64748b"
+                      }}
+                    >
+                      {index < 2 ? <Check className="size-3" /> : "•"}
+                    </span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </section>
         </main>
 
         <footer
@@ -200,7 +287,7 @@ function WebsitePreview({ palette }: WebsitePreviewProps) {
         </footer>
       </div>
 
-      <section id="metrics" className="grid gap-3 sm:grid-cols-2">
+      <section id="color-roles" className="grid gap-3 sm:grid-cols-2">
         {[
           { label: "Primary", hex: primary },
           { label: "Secondary", hex: secondary }

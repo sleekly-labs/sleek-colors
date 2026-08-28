@@ -318,30 +318,272 @@ const websitePaletteSeries = [
 const websitePaletteDate = "2026-08-27";
 const websitePaletteVariantCount = 5;
 
-export const websitePalettes = websitePaletteSeries.flatMap(
-  (series, seriesIndex) =>
-    series.variants.map((variant, variantIndex) => ({
-      id: `palette_website_${String(
-        seriesIndex * websitePaletteVariantCount + variantIndex + 1
-      ).padStart(3, "0")}`,
-      slug: `${series.slug}-${variant.slugSuffix}`,
-      name: `${series.name} ${variant.primaryLabel} & ${variant.secondaryLabel}`,
-      description: `${series.description} ${variant.primaryLabel} leads while ${variant.secondaryLabel} supports.`,
-      colors: [
-        { hex: variant.primaryHex, name: variant.primaryLabel },
-        { hex: variant.secondaryHex, name: variant.secondaryLabel }
-      ],
-      categories: [...series.categories],
-      moods: [...series.moods],
-      tags: [...series.tags, variant.slugSuffix],
-      colorFamilies: [...series.colorFamilies],
-      paletteType: "website",
-      primaryColor: variant.primaryHex,
-      secondaryColor: variant.secondaryHex,
-      supportsWebsitePreview: true,
-      isFeatured: seriesIndex < 3 && variantIndex < 2,
-      status: "published",
-      createdAt: websitePaletteDate,
-      updatedAt: websitePaletteDate
-    }))
-) satisfies readonly WebsitePalette[];
+const additionalWebsitePalettes = [
+  {
+    id: "palette_website_031",
+    slug: "cyber-grape-acid-lime",
+    name: "Cyber Grape & Acid Lime",
+    description:
+      "A vivid digital pairing with electric contrast for bold interfaces.",
+    colors: [{ hex: "#6D28D9" }, { hex: "#D7FF00" }],
+    categories: ["Website", "Vibrant"],
+    moods: ["Futuristic", "Bold"],
+    tags: ["cyber-grape", "acid-lime", "neon", "technology"],
+    colorFamilies: ["Purple", "Green"],
+    paletteType: "website",
+    primaryColor: "#6D28D9",
+    secondaryColor: "#D7FF00",
+    supportsWebsitePreview: true,
+    isFeatured: true,
+    status: "published",
+    createdAt: websitePaletteDate,
+    updatedAt: websitePaletteDate
+  },
+  {
+    id: "palette_website_032",
+    slug: "raspberry-pale-sky",
+    name: "Raspberry & Pale Sky",
+    description:
+      "A confident berry accent softened by an airy sky support tone.",
+    colors: [{ hex: "#C2185B" }, { hex: "#E0F2FE" }],
+    categories: ["Website", "Vibrant"],
+    moods: ["Romantic", "Fresh"],
+    tags: ["raspberry", "pale-sky", "berry", "editorial"],
+    colorFamilies: ["Pink", "Blue"],
+    paletteType: "website",
+    primaryColor: "#C2185B",
+    secondaryColor: "#E0F2FE",
+    supportsWebsitePreview: true,
+    isFeatured: true,
+    status: "published",
+    createdAt: websitePaletteDate,
+    updatedAt: websitePaletteDate
+  },
+  {
+    id: "palette_website_033",
+    slug: "quantum-blue-ice-glass",
+    name: "Quantum Blue & Ice Glass",
+    description: "A crisp blue system with a cool, luminous support color.",
+    colors: [{ hex: "#2457FF" }, { hex: "#DFF7FF" }],
+    categories: ["Website", "Bold"],
+    moods: ["Futuristic", "Modern"],
+    tags: ["quantum-blue", "ice-glass", "saas", "digital"],
+    colorFamilies: ["Blue", "Teal"],
+    paletteType: "website",
+    primaryColor: "#2457FF",
+    secondaryColor: "#DFF7FF",
+    supportsWebsitePreview: true,
+    isFeatured: true,
+    status: "published",
+    createdAt: websitePaletteDate,
+    updatedAt: websitePaletteDate
+  },
+  {
+    id: "palette_website_034",
+    slug: "deep-graphite-lime-compute",
+    name: "Deep Graphite & Lime Compute",
+    description:
+      "A dense graphite base energized by a high-visibility lime signal.",
+    colors: [{ hex: "#1F2329" }, { hex: "#B6FF2E" }],
+    categories: ["Website", "Minimal"],
+    moods: ["Futuristic", "Bold"],
+    tags: ["deep-graphite", "lime-compute", "developer", "dark-ui"],
+    colorFamilies: ["Black", "Green"],
+    paletteType: "website",
+    primaryColor: "#1F2329",
+    secondaryColor: "#B6FF2E",
+    supportsWebsitePreview: true,
+    isFeatured: true,
+    status: "published",
+    createdAt: websitePaletteDate,
+    updatedAt: websitePaletteDate
+  },
+  {
+    id: "palette_website_035",
+    slug: "blueberry-cream-soda",
+    name: "Blueberry & Cream Soda",
+    description:
+      "A grounded blueberry anchor paired with a warm, inviting cream.",
+    colors: [{ hex: "#243B8F" }, { hex: "#FFF0C9" }],
+    categories: ["Website", "Minimal"],
+    moods: ["Calm", "Elegant"],
+    tags: ["blueberry", "cream-soda", "hospitality", "trust"],
+    colorFamilies: ["Blue", "Yellow"],
+    paletteType: "website",
+    primaryColor: "#243B8F",
+    secondaryColor: "#FFF0C9",
+    supportsWebsitePreview: true,
+    isFeatured: true,
+    status: "published",
+    createdAt: websitePaletteDate,
+    updatedAt: websitePaletteDate
+  },
+  {
+    id: "palette_website_036",
+    slug: "cyber-teal-aqua-foam",
+    name: "Cyber Teal & Aqua Foam",
+    description:
+      "A deep teal foundation with a bright aquatic lift for modern products.",
+    colors: [{ hex: "#03313A" }, { hex: "#8FFFE0" }],
+    categories: ["Website", "Ocean"],
+    moods: ["Fresh", "Futuristic"],
+    tags: ["cyber-teal", "aqua-foam", "ocean", "product"],
+    colorFamilies: ["Teal", "Green"],
+    paletteType: "website",
+    primaryColor: "#03313A",
+    secondaryColor: "#8FFFE0",
+    supportsWebsitePreview: true,
+    isFeatured: true,
+    status: "published",
+    createdAt: websitePaletteDate,
+    updatedAt: websitePaletteDate
+  },
+  {
+    id: "palette_website_037",
+    slug: "neon-orange-porcelain",
+    name: "Neon Orange & Porcelain",
+    description:
+      "A high-energy orange signal balanced by a clean porcelain canvas.",
+    colors: [{ hex: "#FF6115" }, { hex: "#FFFCF4" }],
+    categories: ["Website", "Vibrant"],
+    moods: ["Energetic", "Fresh"],
+    tags: ["neon-orange", "porcelain", "campaign", "commerce"],
+    colorFamilies: ["Orange", "White"],
+    paletteType: "website",
+    primaryColor: "#FF6115",
+    secondaryColor: "#FFFCF4",
+    supportsWebsitePreview: true,
+    isFeatured: true,
+    status: "published",
+    createdAt: websitePaletteDate,
+    updatedAt: websitePaletteDate
+  },
+  {
+    id: "palette_website_038",
+    slug: "forest-graphite-acid-mint",
+    name: "Forest Graphite & Acid Mint",
+    description:
+      "An organic graphite pairing with a sharp mint signal for fresh brands.",
+    colors: [{ hex: "#18251D" }, { hex: "#B7FF72" }],
+    categories: ["Website", "Nature"],
+    moods: ["Fresh", "Modern"],
+    tags: ["forest-graphite", "acid-mint", "nature", "sustainable"],
+    colorFamilies: ["Green", "Black"],
+    paletteType: "website",
+    primaryColor: "#18251D",
+    secondaryColor: "#B7FF72",
+    supportsWebsitePreview: true,
+    isFeatured: true,
+    status: "published",
+    createdAt: websitePaletteDate,
+    updatedAt: websitePaletteDate
+  },
+  {
+    id: "palette_website_039",
+    slug: "signal-violet-mist-gray",
+    name: "Signal Violet & Mist Gray",
+    description: "A saturated violet lead softened by a quiet, adaptable gray.",
+    colors: [{ hex: "#7A35FF" }, { hex: "#F0F2F5" }],
+    categories: ["Website", "Minimal"],
+    moods: ["Modern", "Professional"],
+    tags: ["signal-violet", "mist-gray", "software", "interface"],
+    colorFamilies: ["Purple", "Gray"],
+    paletteType: "website",
+    primaryColor: "#7A35FF",
+    secondaryColor: "#F0F2F5",
+    supportsWebsitePreview: true,
+    isFeatured: true,
+    status: "published",
+    createdAt: websitePaletteDate,
+    updatedAt: websitePaletteDate
+  },
+  {
+    id: "palette_website_040",
+    slug: "inkberry-peach",
+    name: "Inkberry & Peach",
+    description: "A rich inkberry anchor with a warm peach counterpoint.",
+    colors: [{ hex: "#1A0B2E" }, { hex: "#FFB7A5" }],
+    categories: ["Website", "Vintage"],
+    moods: ["Romantic", "Elegant"],
+    tags: ["inkberry", "peach", "beauty", "editorial"],
+    colorFamilies: ["Purple", "Orange"],
+    paletteType: "website",
+    primaryColor: "#1A0B2E",
+    secondaryColor: "#FFB7A5",
+    supportsWebsitePreview: true,
+    isFeatured: true,
+    status: "published",
+    createdAt: websitePaletteDate,
+    updatedAt: websitePaletteDate
+  },
+  {
+    id: "palette_website_041",
+    slug: "prompt-blue-ai-green",
+    name: "Prompt Blue & AI Green",
+    description:
+      "A focused ink blue paired with an optimistic green signal for AI products.",
+    colors: [{ hex: "#0B132B" }, { hex: "#39FF88" }],
+    categories: ["Website", "Bold"],
+    moods: ["Futuristic", "Bold"],
+    tags: ["prompt-blue", "ai-green", "ai", "technology"],
+    colorFamilies: ["Blue", "Green"],
+    paletteType: "website",
+    primaryColor: "#0B132B",
+    secondaryColor: "#39FF88",
+    supportsWebsitePreview: true,
+    isFeatured: true,
+    status: "published",
+    createdAt: websitePaletteDate,
+    updatedAt: websitePaletteDate
+  },
+  {
+    id: "palette_website_042",
+    slug: "clay-brown-soft-butter",
+    name: "Clay Brown & Soft Butter",
+    description:
+      "A tactile clay brown grounded by a warm, optimistic butter tone.",
+    colors: [{ hex: "#6B352A" }, { hex: "#FFF1A6" }],
+    categories: ["Website", "Earthy"],
+    moods: ["Cozy", "Elegant"],
+    tags: ["clay-brown", "soft-butter", "craft", "hospitality"],
+    colorFamilies: ["Brown", "Yellow"],
+    paletteType: "website",
+    primaryColor: "#6B352A",
+    secondaryColor: "#FFF1A6",
+    supportsWebsitePreview: true,
+    isFeatured: true,
+    status: "published",
+    createdAt: websitePaletteDate,
+    updatedAt: websitePaletteDate
+  }
+] as const satisfies readonly WebsitePalette[];
+
+export const websitePalettes: readonly WebsitePalette[] = [
+  ...websitePaletteSeries.flatMap((series, seriesIndex) =>
+    series.variants.map(
+      (variant, variantIndex) =>
+        ({
+          id: `palette_website_${String(
+            seriesIndex * websitePaletteVariantCount + variantIndex + 1
+          ).padStart(3, "0")}`,
+          slug: `${series.slug}-${variant.slugSuffix}`,
+          name: `${series.name} ${variant.primaryLabel} & ${variant.secondaryLabel}`,
+          description: `${series.description} ${variant.primaryLabel} leads while ${variant.secondaryLabel} supports.`,
+          colors: [{ hex: variant.primaryHex }, { hex: variant.secondaryHex }],
+          categories: [...series.categories],
+          moods: [...series.moods],
+          tags: [...series.tags, variant.slugSuffix],
+          colorFamilies: [...series.colorFamilies],
+          paletteType: "website",
+          primaryColor: variant.primaryHex,
+          secondaryColor: variant.secondaryHex,
+          supportsWebsitePreview: true,
+          isFeatured: seriesIndex < 3 && variantIndex < 2,
+          status: "published",
+          createdAt: websitePaletteDate,
+          updatedAt: websitePaletteDate
+        }) satisfies WebsitePalette
+    )
+  ),
+  ...additionalWebsitePalettes
+];
