@@ -13,7 +13,7 @@ This file is the execution checklist for the MVP described in `PRD.md`. Update i
 ## Current Status
 
 - **Current phase:** Phase 6 - SEO, Sharing, Analytics, and Supporting Pages
-- **Next task:** Add focused automated tests for data validation, search/filter composition, copy formatting, related palettes, and preview state.
+- **Next task:** Run lint, type checking, formatting checks, automated tests, and a production build.
 - **MVP status:** In progress
 - **Last updated:** 2026-08-27
 
@@ -147,7 +147,7 @@ Goal: make palette pages indexable and product behavior measurable without exces
 
 Goal: verify the complete MVP across behavior, viewports, accessibility, and production builds.
 
-- [ ] Add focused automated tests for data validation, search/filter composition, copy formatting, related palettes, and preview state.
+- [x] Add focused automated tests for data validation, search/filter composition, copy formatting, related palettes, and preview state.
 - [ ] Run lint, type checking, formatting checks, automated tests, and a production build.
 - [ ] Test core journeys at representative desktop, tablet, and mobile viewports.
 - [ ] Test core journeys with keyboard-only navigation and visible focus states.
