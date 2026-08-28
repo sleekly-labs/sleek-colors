@@ -1,13 +1,12 @@
 "use client";
 
-import { Copy, ExternalLink } from "lucide-react";
-import Link from "next/link";
-import { useId, useState } from "react";
-
 import { Button, buttonLinkClassName } from "@/components/ui/button";
 import { copyHexToClipboard, copyPaletteToClipboard } from "@/lib/clipboard";
 import { cn } from "@/lib/utils";
 import type { GeneralPalette } from "@/types";
+import { Check, Copy, ExternalLink } from "lucide-react";
+import Link from "next/link";
+import { useId, useState } from "react";
 
 import { CopyFeedback } from "./copy-feedback";
 
@@ -25,14 +24,12 @@ function GeneralPaletteCard({
   const statusId = useId();
   const [copiedHex, setCopiedHex] = useState<string | null>(null);
   const [copiedPalette, setCopiedPalette] = useState(false);
-  const [statusMessage, setStatusMessage] = useState("");
 
   async function handleCopy(hex: string) {
     const result = await copyHexToClipboard(hex);
 
     if (result.ok) {
       setCopiedHex(result.value);
-      setStatusMessage(`${result.value} copied to clipboard.`);
       window.setTimeout(() => {
         setCopiedHex((currentHex) =>
           currentHex === result.value ? null : currentHex
@@ -40,8 +37,6 @@ function GeneralPaletteCard({
       }, 1200);
       return;
     }
-
-    setStatusMessage(`Could not copy ${result.value}.`);
   }
 
   async function handleCopyPalette() {
@@ -51,14 +46,11 @@ function GeneralPaletteCard({
 
     if (result.ok) {
       setCopiedPalette(true);
-      setStatusMessage("Full palette copied to clipboard.");
       window.setTimeout(() => {
         setCopiedPalette(false);
       }, 1200);
       return;
     }
-
-    setStatusMessage("Could not copy full palette.");
   }
 
   return (
@@ -153,15 +145,15 @@ function GeneralPaletteCard({
             className="text-muted-foreground text-sm"
             aria-live="polite"
           >
-            {statusMessage || "Select color or copy full palette."}
+            Select color or copy full palette.
           </span>
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap justify-between gap-2">
             <Button
               variant={copiedPalette ? "secondary" : "outline"}
               size="sm"
               onClick={() => void handleCopyPalette()}
             >
-              <Copy />
+              {copiedPalette ? <Check /> : <Copy />}
               <span>{copiedPalette ? "Palette copied" : "Copy palette"}</span>
             </Button>
             <Link

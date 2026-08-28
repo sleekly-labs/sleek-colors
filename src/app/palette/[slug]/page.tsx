@@ -1,5 +1,5 @@
-import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { PageContainer, PageSection, SectionHeader } from "@/components/layout";

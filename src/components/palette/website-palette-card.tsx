@@ -1,7 +1,7 @@
 "use client";
 
+import { Check, Copy, ExternalLink } from "lucide-react";
 import Link from "next/link";
-import { Copy, ExternalLink } from "lucide-react";
 import { useId, useState } from "react";
 
 import { Button, buttonLinkClassName } from "@/components/ui/button";
@@ -30,7 +30,6 @@ function WebsitePaletteCard({
   const statusId = useId();
   const [copiedHex, setCopiedHex] = useState<string | null>(null);
   const [copiedPalette, setCopiedPalette] = useState(false);
-  const [statusMessage, setStatusMessage] = useState("");
 
   const roleColors: RoleColor[] = [
     {
@@ -48,7 +47,6 @@ function WebsitePaletteCard({
 
     if (result.ok) {
       setCopiedHex(result.value);
-      setStatusMessage(`${role} color ${result.value} copied to clipboard.`);
       window.setTimeout(() => {
         setCopiedHex((currentHex) =>
           currentHex === result.value ? null : currentHex
@@ -56,8 +54,6 @@ function WebsitePaletteCard({
       }, 1200);
       return;
     }
-
-    setStatusMessage(`Could not copy ${result.value}.`);
   }
 
   async function handleCopyPalette() {
@@ -67,14 +63,11 @@ function WebsitePaletteCard({
 
     if (result.ok) {
       setCopiedPalette(true);
-      setStatusMessage("Full palette copied to clipboard.");
       window.setTimeout(() => {
         setCopiedPalette(false);
       }, 1200);
       return;
     }
-
-    setStatusMessage("Could not copy full palette.");
   }
 
   return (
@@ -174,15 +167,15 @@ function WebsitePaletteCard({
             className="text-muted-foreground text-sm"
             aria-live="polite"
           >
-            {statusMessage || "Select role color or copy full palette."}
+            Select role color or copy full palette.
           </span>
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap justify-between gap-2">
             <Button
               variant={copiedPalette ? "secondary" : "outline"}
               size="sm"
               onClick={() => void handleCopyPalette()}
             >
-              <Copy />
+              {copiedPalette ? <Check /> : <Copy />}
               <span>{copiedPalette ? "Palette copied" : "Copy palette"}</span>
             </Button>
             {palette.supportsWebsitePreview ? (

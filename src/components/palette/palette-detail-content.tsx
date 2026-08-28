@@ -1,6 +1,6 @@
 "use client";
 
-import { Copy, Link2, Share2 } from "lucide-react";
+import { Check, Copy, Link2, Share2 } from "lucide-react";
 import { useId, useState } from "react";
 
 import { Button } from "@/components/ui/button";
@@ -28,8 +28,8 @@ function PaletteDetailContent({
 }: PaletteDetailContentProps) {
   const statusId = useId();
   const [copiedHex, setCopiedHex] = useState<string | null>(null);
+  const [copiedLink, setCopiedLink] = useState(false);
   const [copiedPalette, setCopiedPalette] = useState(false);
-  const [statusMessage, setStatusMessage] = useState("");
   const metadataItems = [
     {
       label: "Category",
@@ -68,7 +68,6 @@ function PaletteDetailContent({
 
     if (result.ok) {
       setCopiedHex(result.value);
-      setStatusMessage(`${result.value} copied to clipboard.`);
       window.setTimeout(() => {
         setCopiedHex((currentHex) =>
           currentHex === result.value ? null : currentHex
@@ -76,8 +75,6 @@ function PaletteDetailContent({
       }, 1200);
       return;
     }
-
-    setStatusMessage(`Could not copy ${result.value}.`);
   }
 
   async function handleCopyPalette() {
@@ -87,14 +84,11 @@ function PaletteDetailContent({
 
     if (result.ok) {
       setCopiedPalette(true);
-      setStatusMessage("Full palette copied to clipboard.");
       window.setTimeout(() => {
         setCopiedPalette(false);
       }, 1200);
       return;
     }
-
-    setStatusMessage("Could not copy full palette.");
   }
 
   async function handleCopyLink() {
@@ -102,10 +96,11 @@ function PaletteDetailContent({
 
     try {
       await navigator.clipboard.writeText(href);
-      setStatusMessage("Palette link copied to clipboard.");
-    } catch {
-      setStatusMessage("Could not copy palette link.");
-    }
+      setCopiedLink(true);
+      window.setTimeout(() => {
+        setCopiedLink(false);
+      }, 1200);
+    } catch {}
   }
 
   async function handleShare() {
@@ -118,16 +113,13 @@ function PaletteDetailContent({
           text: palette.description ?? "Explore this curated color palette.",
           url: href
         });
-        setStatusMessage("Palette shared.");
         return;
       } catch (error) {
         if (error instanceof DOMException && error.name === "AbortError") {
-          setStatusMessage("Share canceled.");
           return;
         }
       }
     }
-
     await handleCopyLink();
   }
 
@@ -171,7 +163,7 @@ function PaletteDetailContent({
                   aria-label={`Copy ${color.hex}`}
                   className="bg-white/15 text-white shadow-none hover:bg-white/25"
                 >
-                  <Copy />
+                  {copiedHex === color.hex ? <Check /> : <Copy />}
                 </Button>
               </div>
               <div className="space-y-1 text-white">
@@ -231,7 +223,6 @@ function PaletteDetailContent({
           <div className="grid gap-3">
             {palette.colors.map((color) => {
               const isCopied = copiedHex === color.hex;
-
               return (
                 <Button
                   key={color.hex}
@@ -267,19 +258,19 @@ function PaletteDetailContent({
               className="text-muted-foreground text-sm"
               aria-live="polite"
             >
-              {statusMessage || "Copy a color, the full palette, or the link."}
+              Copy a color, the full palette, or the link.
             </p>
           </div>
           <Button
             variant={copiedPalette ? "secondary" : "outline"}
             onClick={() => void handleCopyPalette()}
           >
-            <Copy />
+            {copiedPalette ? <Check /> : <Copy />}
             <span>{copiedPalette ? "Palette copied" : "Copy palette"}</span>
           </Button>
           <Button variant="outline" onClick={() => void handleCopyLink()}>
-            <Link2 />
-            <span>Copy link</span>
+            {copiedLink ? <Check /> : <Link2 />}
+            <span>{copiedLink ? "Link copied" : "Copy link"}</span>
           </Button>
           <Button variant="outline" onClick={() => void handleShare()}>
             <Share2 />
