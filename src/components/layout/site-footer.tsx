@@ -48,6 +48,8 @@ function SiteFooter({ className }: SiteFooterProps) {
                   alt="Sleek Colors"
                   width={1448}
                   height={1086}
+                  loading="lazy"
+                  quality={85}
                   sizes="(min-width: 640px) 128px, 112px"
                   className="h-auto w-full"
                 />

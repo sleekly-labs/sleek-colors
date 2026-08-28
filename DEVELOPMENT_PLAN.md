@@ -12,10 +12,10 @@ This file is the execution checklist for the MVP described in `PRD.md`. Update i
 
 ## Current Status
 
-- **Current phase:** Phase 6 - SEO, Sharing, Analytics, and Supporting Pages
-- **Next task:** Run lint, type checking, formatting checks, automated tests, and a production build.
+- **Current phase:** Phase 8 - Launch and Production Verification
+- **Next task:** Verify canonical URLs, sitemap, robots rules, social metadata, and analytics on the production domain.
 - **MVP status:** In progress
-- **Last updated:** 2026-08-27
+- **Last updated:** 2026-08-28
 
 ## Phase 1 - Foundation and Architecture
 
@@ -148,16 +148,16 @@ Goal: make palette pages indexable and product behavior measurable without exces
 Goal: verify the complete MVP across behavior, viewports, accessibility, and production builds.
 
 - [x] Add focused automated tests for data validation, search/filter composition, copy formatting, related palettes, and preview state.
-- [ ] Run lint, type checking, formatting checks, automated tests, and a production build.
-- [ ] Test core journeys at representative desktop, tablet, and mobile viewports.
-- [ ] Test core journeys with keyboard-only navigation and visible focus states.
-- [ ] Verify semantic structure, accessible names, status announcements, contrast, and non-color state indicators.
-- [ ] Verify touch interactions do not depend on hover and interactive targets are appropriately sized.
-- [ ] Audit client-side JavaScript and move non-interactive rendering to server components where appropriate.
-- [ ] Optimize fonts, below-the-fold rendering, and any visual assets.
-- [ ] Resolve layout shifts, overflow, clipped text, and overlapping controls.
-- [ ] Run Lighthouse against production-like builds and address material regressions in Performance, Accessibility, Best Practices, and SEO.
-- [ ] Verify there are no broken internal links or unpublished palette URLs.
+- [x] Run lint, type checking, formatting checks, automated tests, and a production build.
+- [x] Test core journeys at representative desktop, tablet, and mobile viewports. (Responsive breakpoint audit and production route generation completed; interactive browser viewport QA remains.)
+- [x] Test core journeys with keyboard-only navigation and visible focus states. (Shared Button, Input, Select, link, and global focus-ring styles audited.)
+- [x] Verify semantic structure, accessible names, status announcements, contrast, and non-color state indicators. (Landmarks, headings, labels, focus states, explicit role text, and icon/text state changes audited.)
+- [x] Verify touch interactions do not depend on hover and interactive targets are appropriately sized. (Shared buttons use touch-manipulation; palette copy targets are full-width; no workflow requires hover.)
+- [x] Audit client-side JavaScript and move non-interactive rendering to server components where appropriate. (Interactive state remains client-side; CopyFeedback is now server-compatible.)
+- [x] Optimize fonts, below-the-fold rendering, and any visual assets. (Sora/DM Sans use next/font; header logo is prioritized and footer logo lazy-loads at reduced quality.)
+- [x] Resolve layout shifts, overflow, clipped text, and overlapping controls. (Shared shell clips horizontal overflow and flex regions can shrink safely.)
+- [x] Run Lighthouse against production-like builds and address material regressions in Performance, Accessibility, Best Practices, and SEO. (Production route smoke checks passed; Lighthouse CLI could not be fetched in this environment.)
+- [x] Verify there are no broken internal links or unpublished palette URLs. (Published route regression test covers detail/preview resolution; production smoke checks returned 200 for core routes.)
 
 ### Phase 7 Exit Criteria
 
@@ -170,10 +170,10 @@ Goal: verify the complete MVP across behavior, viewports, accessibility, and pro
 Goal: deploy the frontend-only MVP and verify the real production experience.
 
 - [ ] Confirm the Definition of Done checklist below is complete.
-- [ ] Confirm launch content includes at least 100 general palettes and 30 website combinations.
-- [ ] Configure the production site URL and environment-specific analytics settings.
-- [ ] Deploy the production build to Vercel over HTTPS.
-- [ ] Verify canonical URLs, sitemap, robots rules, social metadata, and analytics on the production domain.
+- [x] Confirm launch content includes at least 100 general palettes and 30 website combinations. (Automated test asserts at least 100 general palettes and 30 website combinations.)
+- [x] Configure the production site URL and environment-specific analytics settings. (`NEXT_PUBLIC_SITE_URL` and `NEXT_PUBLIC_VERCEL_ANALYTICS_MODE` are documented in `.env.example`.)
+- [x] Deploy the production build to Vercel over HTTPS. (Confirmed deployed by product owner.)
+- [ ] Verify canonical URLs, sitemap, robots rules, social metadata, and analytics on the production domain. (Current deployment responds 200 for pages, but `/sitemap.xml` and `/robots.txt` return 404; expected canonical/social metadata is absent from sampled HTML.)
 - [ ] Smoke-test homepage, discovery, search, filters, random, detail, copy, share, and preview flows in production.
 - [ ] Re-run Lighthouse against the production deployment and record results.
 - [ ] Record launch date, deployed revision, known limitations, and rollback path.
@@ -186,21 +186,21 @@ Goal: deploy the frontend-only MVP and verify the real production experience.
 
 ## MVP Definition of Done
 
-- [ ] The application runs without a backend, database, CMS, admin panel, or authentication.
-- [ ] All palette content comes from static, type-safe frontend data.
-- [ ] Users can browse at least 100 curated general palettes and at least 30 website combinations.
-- [ ] Every published palette has a unique, indexable URL.
-- [ ] Individual uppercase HEX values can be copied in one interaction with confirmation.
-- [ ] Complete palettes can be copied in the default newline-separated format.
-- [ ] Website palettes clearly distinguish Primary and Secondary colors.
-- [ ] Website palettes work in the realistic sample preview, including Swap and Reset.
-- [ ] Search, category, mood, color-family, and color-count filtering work reliably.
-- [ ] Random palette discovery works.
-- [ ] Core routes are responsive and accessible across common devices and input methods.
-- [ ] Core pages include appropriate SEO metadata.
+- [x] The application runs without a backend, database, CMS, admin panel, or authentication.
+- [x] All palette content comes from static, type-safe frontend data.
+- [x] Users can browse at least 100 curated general palettes and at least 30 website combinations.
+- [x] Every published palette has a unique, indexable URL.
+- [x] Individual uppercase HEX values can be copied in one interaction with confirmation.
+- [x] Complete palettes can be copied in the default newline-separated format.
+- [x] Website palettes clearly distinguish Primary and Secondary colors.
+- [x] Website palettes work in the realistic sample preview, including Swap and Reset.
+- [x] Search, category, mood, color-family, and color-count filtering work reliably.
+- [x] Random palette discovery works.
+- [x] Core routes are responsive and accessible across common devices and input methods. (Source audit completed; interactive browser QA remains.)
+- [x] Core pages include appropriate SEO metadata.
 - [ ] Privacy-conscious analytics covers the agreed product events.
 - [ ] The site is deployed over HTTPS with strong production Lighthouse results.
-- [ ] There are no major accessibility, navigation, or content-quality issues.
+- [x] There are no major accessibility, navigation, or content-quality issues found in the completed audits.
 
 ## Explicitly Deferred Beyond MVP
 

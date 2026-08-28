@@ -35,6 +35,8 @@ function SiteHeader({ className }: SiteHeaderProps) {
                 alt="Sleek Colors"
                 width={1448}
                 height={1086}
+                priority
+                quality={85}
                 sizes="(min-width: 1024px) 144px, (min-width: 640px) 128px, 112px"
                 className="h-auto w-full"
               />

@@ -10,8 +10,13 @@ const stripQueryParameters: BeforeSend = (event) => {
   };
 };
 
+const analyticsMode =
+  process.env.NEXT_PUBLIC_VERCEL_ANALYTICS_MODE === "development"
+    ? "development"
+    : "auto";
+
 function PrivacyAnalytics() {
-  return <Analytics beforeSend={stripQueryParameters} />;
+  return <Analytics beforeSend={stripQueryParameters} mode={analyticsMode} />;
 }
 
 export { PrivacyAnalytics };

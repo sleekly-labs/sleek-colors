@@ -24,7 +24,7 @@ function PageShell({ className, ...props }: PageShellProps) {
   return (
     <div
       className={cn(
-        "bg-background text-foreground flex min-h-svh flex-col",
+        "bg-background text-foreground flex min-h-svh min-w-0 flex-col overflow-x-clip",
         className
       )}
       {...props}
@@ -35,7 +35,7 @@ function PageShell({ className, ...props }: PageShellProps) {
 type MainRegionProps = ComponentPropsWithoutRef<"main">;
 
 function MainRegion({ className, ...props }: MainRegionProps) {
-  return <main className={cn("flex-1", className)} {...props} />;
+  return <main className={cn("min-w-0 flex-1", className)} {...props} />;
 }
 
 type PageContainerProps = ComponentPropsWithoutRef<"div"> & {
