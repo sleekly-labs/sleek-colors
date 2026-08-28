@@ -1,18 +1,12 @@
-import { ArrowRight, Search, Sparkles } from "lucide-react";
-import Link from "next/link";
-import { Suspense } from "react";
-
+import { HeroColorLab } from "@/components/home/hero-color-lab";
 import { PageContainer, PageSection, SectionHeader } from "@/components/layout";
 import { WebsitePaletteGrid } from "@/components/palette";
 import { PaletteExplorerPreview } from "@/components/search";
 import { buttonLinkClassName } from "@/components/ui/button";
-import {
-  getCategoryDefinitions,
-  getGeneralPalettes,
-  getWebsitePalettes
-} from "@/data";
-
-const heroPalette = ["#101828", "#7F56D9", "#D6BBFB", "#F9FAFB"] as const;
+import { getGeneralPalettes, getWebsitePalettes } from "@/data";
+import { ArrowRight, Search, Sparkles } from "lucide-react";
+import Link from "next/link";
+import { Suspense } from "react";
 
 export default function Home() {
   const generalPalettes = getGeneralPalettes("published");
@@ -21,22 +15,27 @@ export default function Home() {
 
   return (
     <>
-      <PageSection spacing="loose" className="border-b">
-        <PageContainer className="grid gap-10 lg:grid-cols-[minmax(0,1.15fr)_24rem] lg:items-end">
+      <PageSection
+        spacing="loose"
+        className="mx-3 my-4 w-auto overflow-hidden rounded-[1.5rem] border bg-[linear-gradient(110deg,#f1f5f9_0%,#dbeafe_16%,#cffafe_30%,#ede9fe_44%,#fce7f3_58%,#ffedd5_72%,#fef9c3_86%,#dcfce7_100%)] shadow-sm sm:mx-5 lg:mx-8"
+      >
+        <PageContainer
+          width="wide"
+          className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(26rem,0.9fr)] lg:items-center"
+        >
           <div className="flex flex-col gap-8">
             <div className="flex flex-col gap-5">
-              <span className="text-muted-foreground inline-flex w-fit items-center gap-2 rounded-full border px-3 py-1 text-sm">
-                <Sparkles className="size-4" />
-                Curated color library for product and brand work
+              <span className="text-primary bg-primary/5 border-primary/20 inline-flex w-fit items-center gap-2 rounded-full border px-3 py-1 text-sm">
+                <Sparkles className="text-primary size-4" />
+                Curated color systems for real work
               </span>
-              <div className="max-w-3xl space-y-4">
-                <h1 className="max-w-2xl text-4xl font-bold tracking-normal text-balance md:text-5xl">
+              <div className="max-w-3xl space-y-5">
+                <h1 className="max-w-2xl text-5xl leading-[1.05] font-semibold tracking-tight text-balance md:text-6xl">
                   Find a palette that already knows its job.
                 </h1>
-                <p className="text-muted-foreground max-w-2xl text-base leading-7 text-pretty md:text-lg">
-                  Browse calm interface systems, bold campaign sets, soft
-                  editorials, and launch-ready website combinations without
-                  digging through generic color dumps.
+                <p className="text-muted-foreground max-w-xl text-base leading-7 text-pretty md:text-lg">
+                  A focused library of interface systems, campaign sets, and
+                  website combinations that are ready to make a decision.
                 </p>
               </div>
             </div>
@@ -50,7 +49,7 @@ export default function Home() {
                 <span>Search the library</span>
               </Link>
               <Link
-                href="/palettes"
+                href="/website-colors"
                 className={buttonLinkClassName({
                   variant: "outline",
                   size: "lg"
@@ -60,97 +59,9 @@ export default function Home() {
                 <ArrowRight />
               </Link>
             </div>
-
-            <div className="grid gap-3 sm:grid-cols-3">
-              {[
-                {
-                  label: "General palettes",
-                  value: generalPalettes.length,
-                  note: "Curated multi-color sets"
-                },
-                {
-                  label: "Website combinations",
-                  value: websitePalettes.length,
-                  note: "Primary and secondary pairs"
-                },
-                {
-                  label: "Palette categories",
-                  value: getCategoryDefinitions().length,
-                  note: "Ways to narrow the library"
-                }
-              ].map((item) => (
-                <div
-                  key={item.label}
-                  className="bg-card rounded-card border-border flex min-h-28 flex-col justify-between border px-4 py-4"
-                >
-                  <span className="text-muted-foreground text-sm">
-                    {item.label}
-                  </span>
-                  <div className="space-y-1">
-                    <span className="block text-3xl font-semibold">
-                      {item.value}
-                    </span>
-                    <p className="text-muted-foreground text-sm">{item.note}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
           </div>
 
-          <div className="bg-card rounded-card border-border overflow-hidden border">
-            <div className="grid grid-cols-4">
-              {heroPalette.map((hex) => (
-                <div
-                  key={hex}
-                  className="min-h-28"
-                  style={{ backgroundColor: hex }}
-                  aria-hidden="true"
-                />
-              ))}
-            </div>
-            <div className="grid gap-4 p-5">
-              <div className="space-y-2">
-                <p className="text-xs font-medium tracking-normal uppercase">
-                  This week&apos;s direction
-                </p>
-                <h2 className="text-xl font-semibold">
-                  Quiet product contrast
-                </h2>
-                <p className="text-muted-foreground text-sm leading-6">
-                  Deep ink, controlled violet, and pale support tones suited to
-                  dashboards, product launches, and editorial landing pages.
-                </p>
-              </div>
-              <div className="grid gap-2">
-                {heroPalette.map((hex, index) => (
-                  <div
-                    key={hex}
-                    className="flex items-center justify-between rounded-md border px-3 py-2 text-sm"
-                  >
-                    <div className="flex items-center gap-3">
-                      <span
-                        className="size-6 rounded-md border"
-                        style={{ backgroundColor: hex }}
-                        aria-hidden="true"
-                      />
-                      <span className="font-medium">
-                        {index === 0
-                          ? "Base"
-                          : index === 1
-                            ? "Primary"
-                            : index === 2
-                              ? "Support"
-                              : "Canvas"}
-                      </span>
-                    </div>
-                    <span className="text-muted-foreground font-mono text-xs">
-                      {hex}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
+          <HeroColorLab />
         </PageContainer>
       </PageSection>
 

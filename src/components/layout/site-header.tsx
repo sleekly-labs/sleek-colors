@@ -22,7 +22,7 @@ function SiteHeader({ className }: SiteHeaderProps) {
   return (
     <header
       className={cn(
-        "bg-background/95 supports-[backdrop-filter]:bg-background/80 sticky top-0 z-40 border-b backdrop-blur",
+        "bg-background/95 supports-[backdrop-filter]:bg-background/80 sticky top-0 z-40 mx-3 mt-0 mb-3 w-auto rounded-b-[1.5rem] border shadow-sm backdrop-blur sm:mx-5 lg:mx-8",
         className
       )}
     >

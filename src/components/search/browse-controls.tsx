@@ -1,7 +1,4 @@
 "use client";
-
-import { Search, SlidersHorizontal, X } from "lucide-react";
-
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -12,6 +9,7 @@ import {
   SelectValue
 } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
+import { Search, SlidersHorizontal, X } from "lucide-react";
 
 type BrowseSortOption = {
   label: string;
@@ -90,7 +88,7 @@ function PaletteBrowseControls({
             <SelectContent align="end">
               {sortOptions.map((option) => (
                 <SelectItem key={option.value} value={option.value}>
-                  {option.label}
+                  {option.value}
                 </SelectItem>
               ))}
             </SelectContent>
@@ -131,7 +129,7 @@ function PaletteBrowseControls({
       </div>
       {hasActiveFilters ? (
         <div className="flex justify-start">
-          <Button variant="ghost" size="sm" onClick={onClearFilters}>
+          <Button variant="secondary" size="sm" onClick={onClearFilters}>
             <X />
             <span>Clear filters</span>
           </Button>
@@ -141,5 +139,5 @@ function PaletteBrowseControls({
   );
 }
 
-export type { BrowseFilterGroup, BrowseFilterOption, BrowseSortOption };
 export { PaletteBrowseControls };
+export type { BrowseFilterGroup, BrowseFilterOption, BrowseSortOption };

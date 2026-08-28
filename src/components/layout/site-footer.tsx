@@ -36,7 +36,12 @@ type SiteFooterProps = {
 
 function SiteFooter({ className }: SiteFooterProps) {
   return (
-    <footer className={cn("border-t", className)}>
+    <footer
+      className={cn(
+        "bg-muted/30 mx-3 mt-4 mb-0 w-auto rounded-t-[1.5rem] border shadow-sm sm:mx-5 lg:mx-8",
+        className
+      )}
+    >
       <PageContainer width="full" className="flex flex-col gap-10 py-10">
         <div className="grid gap-10 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)]">
           <div className="flex max-w-xl flex-col gap-4">
