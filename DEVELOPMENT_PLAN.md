@@ -173,7 +173,7 @@ Goal: deploy the frontend-only MVP and verify the real production experience.
 - [x] Confirm launch content includes at least 100 general palettes and 30 website combinations. (Automated test asserts at least 100 general palettes and 30 website combinations.)
 - [x] Configure the production site URL and environment-specific analytics settings. (`NEXT_PUBLIC_SITE_URL` and `NEXT_PUBLIC_VERCEL_ANALYTICS_MODE` are documented in `.env.example`.)
 - [x] Deploy the production build to Vercel over HTTPS. (Confirmed deployed by product owner.)
-- [ ] Verify canonical URLs, sitemap, robots rules, social metadata, and analytics on the production domain. (Current deployment responds 200 for pages, but `/sitemap.xml` and `/robots.txt` return 404; expected canonical/social metadata is absent from sampled HTML.)
+- [ ] Verify canonical URLs, sitemap, robots rules, social metadata, and analytics on the production domain. (Sitemap, robots, and detail-page metadata now pass; homepage canonical and `og:url` were added in the current revision and require one more redeploy before final verification.)
 - [ ] Smoke-test homepage, discovery, search, filters, random, detail, copy, share, and preview flows in production.
 - [ ] Re-run Lighthouse against the production deployment and record results.
 - [ ] Record launch date, deployed revision, known limitations, and rollback path.

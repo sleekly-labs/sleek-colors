@@ -22,16 +22,21 @@ const sora = Sora({
   variable: "--font-sora"
 });
 
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://sleek-colors.vercel.app";
+
 export const metadata: Metadata = {
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL ?? "https://sleek-colors.vercel.app"
-  ),
+  metadataBase: new URL(siteUrl),
   title: {
     default: "Sleek Colors",
     template: "%s | Sleek Colors"
   },
   description: "Curated color palettes and website color combinations.",
+  alternates: { canonical: siteUrl },
   openGraph: {
+    title: "Sleek Colors",
+    description: "Curated color palettes and website color combinations.",
+    url: siteUrl,
     siteName: "Sleek Colors",
     type: "website"
   }
