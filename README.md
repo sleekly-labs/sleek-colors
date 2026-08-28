@@ -1,36 +1,107 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Sleek Colors
+
+Sleek Colors is a curated color library for product designers, UI/UX designers, and frontend developers. It provides general palettes, website-ready Primary and Secondary combinations, copy actions, filtering, and realistic interface previews.
+
+Live site: [sleek-colors.vercel.app](https://sleek-colors.vercel.app)
+
+## Features
+
+- Curated general palettes with HEX copy interactions.
+- Website color combinations with explicit Primary and Secondary roles.
+- Search, sorting, filtering, result counts, and load-more browsing.
+- Category and mood discovery pages.
+- Interactive website previews for supported combinations.
+- Responsive layouts with keyboard-accessible controls.
+- Static SEO metadata, canonical URLs, Open Graph, Twitter cards, sitemap, robots rules, and favicon assets.
+- Privacy-friendly Vercel Analytics integration.
+
+## Routes
+
+| Route                     | Purpose                                |
+| ------------------------- | -------------------------------------- |
+| `/`                       | Homepage and palette discovery         |
+| `/palettes`               | Search and filter general palettes     |
+| `/website-colors`         | Search and filter website combinations |
+| `/palette/[slug]`         | General or website palette details     |
+| `/preview/[palette-slug]` | Interactive website color preview      |
+| `/categories`             | Browse palette categories              |
+| `/category/[slug]`        | Category-specific palette results      |
+| `/random`                 | Open a random published palette        |
+| `/about`                  | Product information                    |
+| `/contact`                | Contact information                    |
+
+## Tech Stack
+
+- Next.js 16 App Router and React 19
+- TypeScript
+- Tailwind CSS v4
+- shadcn/ui components backed by Base UI
+- Vitest for automated tests
+- Prettier with the Tailwind CSS plugin
+- Vercel deployment and Analytics
 
 ## Getting Started
 
-First, run the development server:
+Install dependencies and start the development server:
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Set `NEXT_PUBLIC_SITE_URL` when deploying to a different domain. It controls canonical URLs, sitemap links, robots metadata, and social metadata. The default is `https://sleek-colors.vercel.app`.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```env
+NEXT_PUBLIC_SITE_URL=https://your-domain.example
+```
 
-## Learn More
+## Quality Checks
 
-To learn more about Next.js, take a look at the following resources:
+Run focused checks:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm run lint
+npm run typecheck
+npm run format:check
+npm run test
+npm run build
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Run the complete quality pipeline:
 
-## Deploy on Vercel
+```bash
+npm run quality
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Content Model
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Palette content lives in `src/data/palettes` and is validated before it enters the catalog. Shared types are defined in `src/types`, while taxonomy definitions live in `src/data/taxonomy`.
+
+- General palettes contain 3-8 unique HEX colors.
+- Website palettes contain exactly two colors and identify `primaryColor` and `secondaryColor`.
+- Only published palettes are exposed in public catalog views and generated routes.
+
+## Project Structure
+
+```text
+src/
+  app/                 App Router pages and metadata routes
+  components/          Layout, palette, search, preview, and UI components
+  data/                Catalog access, palette data, and taxonomy
+  lib/                 Clipboard, SEO, validation, and shared utilities
+  types/               Centralized TypeScript domain types
+public/images/         Logo and favicon assets
+```
+
+## Deployment
+
+The project is optimized for Vercel:
+
+```bash
+npm run build
+npm run start
+```
+
+The GitHub Actions workflow runs the repository quality checks on pushes and pull requests. Configure `NEXT_PUBLIC_SITE_URL` in the deployment environment before publishing to a custom domain.
