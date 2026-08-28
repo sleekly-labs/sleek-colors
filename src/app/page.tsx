@@ -3,21 +3,21 @@ import { PageContainer, PageSection, SectionHeader } from "@/components/layout";
 import { WebsitePaletteGrid } from "@/components/palette";
 import { PaletteExplorerPreview } from "@/components/search";
 import { buttonLinkClassName } from "@/components/ui/button";
-import { getGeneralPalettes, getWebsitePalettes } from "@/data";
+import { getFeaturedWebsitePalettes, getGeneralPalettes } from "@/data";
 import { ArrowRight, Search, Sparkles } from "lucide-react";
 import Link from "next/link";
 import { Suspense } from "react";
 
 export default function Home() {
   const generalPalettes = getGeneralPalettes("published");
-  const websitePalettes = getWebsitePalettes("published");
+  const websitePalettes = getFeaturedWebsitePalettes("published");
   const browsePreviewPalettes = generalPalettes.slice(0, 24);
 
   return (
     <>
       <PageSection
         spacing="loose"
-        className="mx-3 my-4 w-auto overflow-hidden rounded-[1.5rem] border bg-[linear-gradient(110deg,#f1f5f9_0%,#dbeafe_16%,#cffafe_30%,#ede9fe_44%,#fce7f3_58%,#ffedd5_72%,#fef9c3_86%,#dcfce7_100%)] shadow-sm sm:mx-5 lg:mx-8"
+        className="mx-3 my-4 w-auto overflow-hidden rounded-[1.5rem] border bg-[linear-gradient(110deg,#f1f5f9_0%,#dbeafe_16%,#cffafe_30%,#ede9fe_44%,#fce7f3_58%,#ffedd5_72%,#fef9c3_86%,#dcfce7_100%)] sm:mx-5 lg:mx-8"
       >
         <PageContainer
           width="wide"
@@ -101,7 +101,7 @@ export default function Home() {
               </Link>
             }
           />
-          <WebsitePaletteGrid palettes={websitePalettes.slice(0, 6)} />
+          <WebsitePaletteGrid palettes={websitePalettes} />
         </PageContainer>
       </PageSection>
     </>

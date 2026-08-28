@@ -1,10 +1,10 @@
-import Link from "next/link";
 import { ArrowRight, Sparkles, SwatchBook } from "lucide-react";
+import Link from "next/link";
 
 import { PageContainer, PageSection, SectionHeader } from "@/components/layout";
 import { buttonLinkClassName } from "@/components/ui/button";
-import { createPageMetadata } from "@/lib/seo";
 import { getGeneralPalettes, getWebsitePalettes } from "@/data";
+import { createPageMetadata } from "@/lib/seo";
 
 export const metadata = createPageMetadata({
   title: "About",
@@ -54,7 +54,7 @@ export default function AboutPage() {
     <>
       <PageSection
         spacing="loose"
-        className="bg-muted/30 mx-3 my-4 w-auto overflow-hidden rounded-[1.5rem] border shadow-sm sm:mx-5 lg:mx-8"
+        className="bg-muted/30 mx-3 my-4 w-auto overflow-hidden rounded-[1.5rem] border sm:mx-5 lg:mx-8"
       >
         <PageContainer
           width="wide"

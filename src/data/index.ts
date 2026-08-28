@@ -1,6 +1,7 @@
 export {
   getCategoryDefinitions,
   getFeaturedPalettes,
+  getFeaturedWebsitePalettes,
   getGeneralPalettes,
   getMoodDefinitions,
   getPaletteBySlug,

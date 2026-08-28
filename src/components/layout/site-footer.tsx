@@ -38,7 +38,7 @@ function SiteFooter({ className }: SiteFooterProps) {
   return (
     <footer
       className={cn(
-        "bg-muted/30 mx-3 mt-4 mb-0 w-auto rounded-t-[1.5rem] border shadow-sm sm:mx-5 lg:mx-8",
+        "bg-muted/30 mx-3 mt-4 mb-0 w-auto rounded-t-[1.5rem] border border-b-0 sm:mx-5 lg:mx-8",
         className
       )}
     >

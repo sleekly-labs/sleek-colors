@@ -118,6 +118,12 @@ export function getWebsitePalettes(
   );
 }
 
+export function getFeaturedWebsitePalettes(
+  status?: PaletteStatus
+): readonly WebsitePalette[] {
+  return getWebsitePalettes(status).filter((palette) => palette.isFeatured);
+}
+
 export function getFeaturedPalettes(): readonly Palette[] {
   return paletteCatalog.palettes.filter((palette) => palette.isFeatured);
 }

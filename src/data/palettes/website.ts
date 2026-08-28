@@ -559,6 +559,7 @@ const additionalWebsitePalettes = [
 ] as const satisfies readonly WebsitePalette[];
 
 export const websitePalettes: readonly WebsitePalette[] = [
+  ...additionalWebsitePalettes,
   ...websitePaletteSeries.flatMap((series, seriesIndex) =>
     series.variants.map(
       (variant, variantIndex) =>
@@ -584,6 +585,5 @@ export const websitePalettes: readonly WebsitePalette[] = [
           updatedAt: websitePaletteDate
         }) satisfies WebsitePalette
     )
-  ),
-  ...additionalWebsitePalettes
+  )
 ];
