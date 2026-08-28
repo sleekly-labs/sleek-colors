@@ -13,7 +13,7 @@ This file is the execution checklist for the MVP described in `PRD.md`. Update i
 ## Current Status
 
 - **Current phase:** Phase 6 - SEO, Sharing, Analytics, and Supporting Pages
-- **Next task:** Generate unique titles, descriptions, canonical URLs, and social metadata for core and palette routes.
+- **Next task:** Add focused automated tests for data validation, search/filter composition, copy formatting, related palettes, and preview state.
 - **MVP status:** In progress
 - **Last updated:** 2026-08-27
 
@@ -128,14 +128,14 @@ Goal: complete the high-value palette evaluation, copying, sharing, and website-
 
 Goal: make palette pages indexable and product behavior measurable without excessive tracking.
 
-- [ ] Generate unique titles, descriptions, canonical URLs, and social metadata for core and palette routes.
-- [ ] Add appropriate structured data for palette detail pages.
-- [ ] Generate sitemap and robots configuration for all indexable routes.
-- [ ] Define a future-compatible strategy for palette-specific Open Graph images without blocking MVP launch.
-- [ ] Add privacy-conscious analytics using one approved provider.
-- [ ] Track the PRD's core discovery, copy, share, random, website-palette, preview, and swap events.
-- [ ] Avoid collecting unnecessary personal data or sensitive search content.
-- [ ] Add Privacy, Terms, and Contact destinations before exposing those links in the footer.
+- [x] Generate unique titles, descriptions, canonical URLs, and social metadata for core and palette routes.
+- [x] Add appropriate structured data for palette detail pages.
+- [x] Generate sitemap and robots configuration for all indexable routes.
+- [x] Define a future-compatible strategy for palette-specific Open Graph images without blocking MVP launch. The SEO helper accepts an optional image path for a future generated asset; no broken image URL is emitted until that asset exists.
+- [x] Add privacy-conscious analytics using one approved provider.
+- [ ] Track the PRD's core discovery, copy, share, random, website-palette, preview, and swap events. (Deferred by product decision.)
+- [x] Avoid collecting unnecessary personal data or sensitive search content.
+- [x] Add Privacy, Terms, and Contact destinations before exposing those links in the footer.
 
 ### Phase 6 Exit Criteria
 

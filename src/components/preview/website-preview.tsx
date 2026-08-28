@@ -15,23 +15,15 @@ type WebsitePreviewProps = {
 function WebsitePreview({ palette }: WebsitePreviewProps) {
   const [swapped, setSwapped] = useState(false);
   const [copied, setCopied] = useState<string | null>(null);
-  const [copyMessage, setCopyMessage] = useState("");
-  const [swapMessage, setSwapMessage] = useState("");
   const primary = swapped ? palette.secondaryColor : palette.primaryColor;
   const secondary = swapped ? palette.primaryColor : palette.secondaryColor;
 
   function handleSwap() {
     setSwapped((value) => !value);
-    setSwapMessage(
-      swapped
-        ? "Original Primary and Secondary roles restored."
-        : "Primary and Secondary roles swapped for this preview."
-    );
   }
 
   function handleReset() {
     setSwapped(false);
-    setSwapMessage("Original Primary and Secondary roles restored.");
   }
 
   async function handleCopy(hex: string) {
@@ -39,14 +31,11 @@ function WebsitePreview({ palette }: WebsitePreviewProps) {
 
     if (result.ok) {
       setCopied(result.value);
-      setCopyMessage(`${result.value} copied to clipboard.`);
       window.setTimeout(() => {
         setCopied((current) => (current === result.value ? null : current));
       }, 1200);
       return;
     }
-
-    setCopyMessage(`Could not copy ${result.value}.`);
   }
 
   return (
@@ -77,9 +66,6 @@ function WebsitePreview({ palette }: WebsitePreviewProps) {
             <span>Reset</span>
           </Button>
         </div>
-        <p className="text-muted-foreground w-full text-sm" aria-live="polite">
-          {swapMessage || "Role changes apply to this preview only."}
-        </p>
       </div>
 
       <div
@@ -245,13 +231,6 @@ function WebsitePreview({ palette }: WebsitePreviewProps) {
             </Button>
           </div>
         ))}
-        <p
-          className="text-muted-foreground text-sm sm:col-span-2"
-          aria-live="polite"
-        >
-          {copyMessage ||
-            "Copy the active color values to compare them in your own design."}
-        </p>
       </section>
 
       <div className="bg-card rounded-card border-border border p-4">

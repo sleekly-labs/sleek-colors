@@ -9,7 +9,15 @@ import {
 } from "@/components/search";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { createPageMetadata } from "@/lib/seo";
 import { getGeneralPalettes, getWebsitePalettes } from "@/data";
+
+export const metadata = createPageMetadata({
+  title: "Search",
+  description:
+    "Search Sleek Colors palettes by name, tags, moods, categories, and HEX values.",
+  path: "/search"
+});
 
 type SearchPageProps = {
   searchParams: Promise<{ q?: string | string[] }>;

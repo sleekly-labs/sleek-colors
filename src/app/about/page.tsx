@@ -3,12 +3,20 @@ import { ArrowRight, Search, SwatchBook } from "lucide-react";
 
 import { PageContainer, PageSection, SectionHeader } from "@/components/layout";
 import { buttonLinkClassName } from "@/components/ui/button";
+import { createPageMetadata } from "@/lib/seo";
 import {
   getCategoryDefinitions,
   getGeneralPalettes,
   getMoodDefinitions,
   getWebsitePalettes
 } from "@/data";
+
+export const metadata = createPageMetadata({
+  title: "About",
+  description:
+    "Learn how Sleek Colors helps teams find and evaluate useful color palettes.",
+  path: "/about"
+});
 
 export default function AboutPage() {
   const generalPalettes = getGeneralPalettes("published");

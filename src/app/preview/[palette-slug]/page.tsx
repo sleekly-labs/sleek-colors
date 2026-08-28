@@ -5,11 +5,32 @@ import { PageContainer, PageSection, SectionHeader } from "@/components/layout";
 import { WebsitePreview } from "@/components/preview";
 import { buttonLinkClassName } from "@/components/ui/button";
 import { getPaletteBySlug, getWebsitePalettes } from "@/data";
+import { createPageMetadata } from "@/lib/seo";
+import type { Metadata } from "next";
 
 export function generateStaticParams() {
   return getWebsitePalettes("published").map((palette) => ({
     "palette-slug": palette.slug
   }));
+}
+
+export async function generateMetadata({
+  params
+}: {
+  params: Promise<{ "palette-slug": string }>;
+}): Promise<Metadata> {
+  const { "palette-slug": slug } = await params;
+  const palette = getPaletteBySlug(slug);
+
+  if (!palette || palette.paletteType !== "website") {
+    return {};
+  }
+
+  return createPageMetadata({
+    title: `${palette.name} Preview`,
+    description: `Preview the ${palette.name} Primary and Secondary colors in a realistic website interface.`,
+    path: `/preview/${palette.slug}`
+  });
 }
 
 export default async function PreviewPage({

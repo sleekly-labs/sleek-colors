@@ -5,7 +5,15 @@ import { ArrowRight, MonitorSmartphone, Search } from "lucide-react";
 import { PageContainer, PageSection, SectionHeader } from "@/components/layout";
 import { WebsitePaletteExplorer } from "@/components/search";
 import { buttonLinkClassName } from "@/components/ui/button";
+import { createPageMetadata } from "@/lib/seo";
 import { getWebsitePalettes } from "@/data";
+
+export const metadata = createPageMetadata({
+  title: "Website Colors",
+  description:
+    "Explore Primary and Secondary color combinations for websites and products.",
+  path: "/website-colors"
+});
 
 export default function WebsiteColorsPage() {
   const palettes = getWebsitePalettes("published");

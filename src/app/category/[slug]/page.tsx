@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { GeneralPaletteGrid, WebsitePaletteGrid } from "@/components/palette";
 import { PageContainer, PageSection, SectionHeader } from "@/components/layout";
 import { buttonLinkClassName } from "@/components/ui/button";
+import { createPageMetadata } from "@/lib/seo";
 import {
   getCategoryDefinitions,
   getGeneralPalettes,
@@ -15,6 +16,25 @@ export function generateStaticParams() {
   return getCategoryDefinitions().map((category) => ({
     slug: category.slug
   }));
+}
+
+export async function generateMetadata({
+  params
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  const category = getCategoryDefinitions().find((item) => item.slug === slug);
+
+  if (!category) {
+    return {};
+  }
+
+  return createPageMetadata({
+    title: `${category.label} palettes`,
+    description: category.description,
+    path: `/category/${category.slug}`
+  });
 }
 
 export default async function CategoryPage({

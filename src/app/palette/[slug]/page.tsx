@@ -10,11 +10,33 @@ import {
 } from "@/components/palette";
 import { buttonLinkClassName } from "@/components/ui/button";
 import { getPaletteBySlug, getPalettes, getRelatedPalettes } from "@/data";
+import { createPageMetadata, siteUrl } from "@/lib/seo";
+import type { Metadata } from "next";
 
 export function generateStaticParams() {
   return getPalettes("published").map((palette) => ({
     slug: palette.slug
   }));
+}
+
+export async function generateMetadata({
+  params
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const palette = getPaletteBySlug(slug);
+
+  if (!palette || palette.status !== "published") {
+    return {};
+  }
+
+  return createPageMetadata({
+    title: palette.name,
+    description:
+      palette.description ?? "Explore and copy this curated color palette.",
+    path: `/palette/${palette.slug}`
+  });
 }
 
 export default async function PalettePage({
@@ -36,9 +58,37 @@ export default async function PalettePage({
   const relatedWebsitePalettes = relatedPalettes.filter(
     (relatedPalette) => relatedPalette.paletteType === "website"
   );
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    name: palette.name,
+    description: palette.description,
+    url: new URL(`/palette/${palette.slug}`, siteUrl).toString(),
+    keywords: [...palette.categories, ...palette.moods, ...palette.tags],
+    color: palette.colors.map((color) => color.hex),
+    additionalProperty:
+      palette.paletteType === "website"
+        ? [
+            {
+              "@type": "PropertyValue",
+              name: "Primary color",
+              value: palette.primaryColor
+            },
+            {
+              "@type": "PropertyValue",
+              name: "Secondary color",
+              value: palette.secondaryColor
+            }
+          ]
+        : undefined
+  };
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
       <PageSection spacing="loose" className="border-b">
         <PageContainer className="flex flex-col gap-6">
           <SectionHeader

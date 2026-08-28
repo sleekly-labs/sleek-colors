@@ -5,11 +5,18 @@ import { ArrowRight, Search } from "lucide-react";
 import { PageContainer, PageSection, SectionHeader } from "@/components/layout";
 import { PaletteExplorerPreview } from "@/components/search";
 import { buttonLinkClassName } from "@/components/ui/button";
+import { createPageMetadata } from "@/lib/seo";
 import {
   getCategoryDefinitions,
   getGeneralPalettes,
   getMoodDefinitions
 } from "@/data";
+
+export const metadata = createPageMetadata({
+  title: "Palette Catalog",
+  description: "Browse, search, and copy every published Sleek Colors palette.",
+  path: "/palettes"
+});
 
 export default function PalettesPage() {
   const palettes = getGeneralPalettes("published");

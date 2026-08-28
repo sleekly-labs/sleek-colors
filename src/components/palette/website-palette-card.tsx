@@ -42,7 +42,7 @@ function WebsitePaletteCard({
     }
   ];
 
-  async function handleCopy(hex: string, role: WebsitePaletteRole) {
+  async function handleCopy(hex: string) {
     const result = await copyHexToClipboard(hex);
 
     if (result.ok) {
@@ -115,7 +115,7 @@ function WebsitePaletteCard({
                   key={color.role}
                   variant="outline"
                   size="default"
-                  onClick={() => void handleCopy(color.hex, color.role)}
+                  onClick={() => void handleCopy(color.hex)}
                   className="h-auto w-full justify-start px-3 py-3 text-left whitespace-normal"
                   aria-describedby={statusId}
                   aria-label={`Copy ${color.role} color ${color.hex}`}

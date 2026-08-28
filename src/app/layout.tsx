@@ -4,7 +4,7 @@ import {
   SiteFooter,
   SiteHeader
 } from "@/components/layout";
-import { Analytics } from "@vercel/analytics/next";
+import { PrivacyAnalytics } from "@/components/analytics/privacy-analytics";
 import type { Metadata } from "next";
 import { DM_Sans, Sora } from "next/font/google";
 import type { ReactNode } from "react";
@@ -23,8 +23,18 @@ const sora = Sora({
 });
 
 export const metadata: Metadata = {
-  title: "Sleek Colors",
-  description: "Curated color palettes and website color combinations."
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL ?? "https://sleek-colors.vercel.app"
+  ),
+  title: {
+    default: "Sleek Colors",
+    template: "%s | Sleek Colors"
+  },
+  description: "Curated color palettes and website color combinations.",
+  openGraph: {
+    siteName: "Sleek Colors",
+    type: "website"
+  }
 };
 
 type RootLayoutProps = Readonly<{
@@ -43,7 +53,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           <MainRegion>{children}</MainRegion>
           <SiteFooter />
         </PageShell>
-        <Analytics />
+        <PrivacyAnalytics />
       </body>
     </html>
   );

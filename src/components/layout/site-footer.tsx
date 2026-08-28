@@ -20,6 +20,14 @@ const footerGroups = [
       { href: "/random", label: "Random" },
       { href: "/about", label: "About" }
     ]
+  },
+  {
+    title: "Support",
+    links: [
+      { href: "/privacy", label: "Privacy" },
+      { href: "/terms", label: "Terms" },
+      { href: "/contact", label: "Contact" }
+    ]
   }
 ] as const;
 
@@ -50,7 +58,7 @@ function SiteFooter({ className }: SiteFooterProps) {
               </p>
             </div>
           </div>
-          <div className="grid gap-8 sm:grid-cols-2">
+          <div className="grid gap-8 sm:grid-cols-3">
             {footerGroups.map((group) => (
               <div key={group.title} className="flex flex-col gap-3">
                 <h2 className="text-sm font-semibold">{group.title}</h2>
