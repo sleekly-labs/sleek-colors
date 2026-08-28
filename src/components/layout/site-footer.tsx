@@ -10,13 +10,12 @@ const footerGroups = [
     links: [
       { href: "/palettes", label: "All palettes" },
       { href: "/website-colors", label: "Website colors" },
-      { href: "/category/pastel", label: "Categories" }
+      { href: "/categories", label: "Categories" }
     ]
   },
   {
     title: "Discover",
     links: [
-      { href: "/search", label: "Search" },
       { href: "/random", label: "Random" },
       { href: "/about", label: "About" }
     ]
@@ -38,7 +37,7 @@ type SiteFooterProps = {
 function SiteFooter({ className }: SiteFooterProps) {
   return (
     <footer className={cn("border-t", className)}>
-      <PageContainer className="flex flex-col gap-10 py-10">
+      <PageContainer width="full" className="flex flex-col gap-10 py-10">
         <div className="grid gap-10 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)]">
           <div className="flex max-w-xl flex-col gap-4">
             <div className="flex flex-col gap-1">

@@ -19,12 +19,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: url("/terms"), changeFrequency: "yearly", priority: 0.3 },
     { url: url("/contact"), changeFrequency: "monthly", priority: 0.4 },
     { url: url("/palettes"), changeFrequency: "weekly", priority: 0.9 },
+    { url: url("/categories"), changeFrequency: "weekly", priority: 0.8 },
     {
       url: url("/website-colors"),
       changeFrequency: "weekly",
       priority: 0.9
     },
-    { url: url("/search"), changeFrequency: "monthly", priority: 0.4 },
     ...getCategoryDefinitions().map((category) => ({
       url: url(`/category/${category.slug}`),
       changeFrequency: "weekly" as const,

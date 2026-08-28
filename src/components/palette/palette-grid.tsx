@@ -18,7 +18,7 @@ function GeneralPaletteGrid({ className, palettes }: GeneralPaletteGridProps) {
   return (
     <div
       className={cn(
-        "grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3",
+        "grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-4 2xl:grid-cols-6",
         className
       )}
     >
@@ -37,7 +37,7 @@ function WebsitePaletteGrid({ className, palettes }: WebsitePaletteGridProps) {
   return (
     <div
       className={cn(
-        "grid grid-cols-1 gap-6 lg:grid-cols-2 xl:grid-cols-3",
+        "grid grid-cols-1 gap-6 lg:grid-cols-2 xl:grid-cols-4 2xl:grid-cols-6",
         className
       )}
     >

@@ -154,7 +154,7 @@ function GeneralPaletteCard({
               onClick={() => void handleCopyPalette()}
             >
               {copiedPalette ? <Check /> : <Copy />}
-              <span>{copiedPalette ? "Palette copied" : "Copy palette"}</span>
+              <span>{copiedPalette ? "Copied" : "Copy palette"}</span>
             </Button>
             <Link
               href={detailHref}

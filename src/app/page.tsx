@@ -3,30 +3,21 @@ import Link from "next/link";
 import { Suspense } from "react";
 
 import { PageContainer, PageSection, SectionHeader } from "@/components/layout";
-import { GeneralPaletteGrid, WebsitePaletteGrid } from "@/components/palette";
+import { WebsitePaletteGrid } from "@/components/palette";
 import { PaletteExplorerPreview } from "@/components/search";
 import { buttonLinkClassName } from "@/components/ui/button";
 import {
   getCategoryDefinitions,
-  getFeaturedPalettes,
   getGeneralPalettes,
-  getMoodDefinitions,
   getWebsitePalettes
 } from "@/data";
-import { cn } from "@/lib/utils";
 
 const heroPalette = ["#101828", "#7F56D9", "#D6BBFB", "#F9FAFB"] as const;
 
 export default function Home() {
   const generalPalettes = getGeneralPalettes("published");
   const websitePalettes = getWebsitePalettes("published");
-  const featuredGeneralPalettes = getFeaturedPalettes()
-    .filter((palette) => palette.paletteType === "general")
-    .slice(0, 3);
-  const featuredWebsitePalettes = websitePalettes.slice(0, 3);
-  const categoryShortcuts = getCategoryDefinitions().slice(0, 4);
-  const moodShortcuts = getMoodDefinitions().slice(0, 4);
-  const browsePreviewPalettes = generalPalettes.slice(0, 18);
+  const browsePreviewPalettes = generalPalettes.slice(0, 24);
 
   return (
     <>
@@ -65,7 +56,7 @@ export default function Home() {
                   size: "lg"
                 })}
               >
-                <span>Browse all palettes</span>
+                <span>Browse website colors</span>
                 <ArrowRight />
               </Link>
             </div>
@@ -83,9 +74,9 @@ export default function Home() {
                   note: "Primary and secondary pairs"
                 },
                 {
-                  label: "Featured directions",
-                  value: featuredGeneralPalettes.length,
-                  note: "Fast starting points"
+                  label: "Palette categories",
+                  value: getCategoryDefinitions().length,
+                  note: "Ways to narrow the library"
                 }
               ].map((item) => (
                 <div
@@ -163,100 +154,25 @@ export default function Home() {
         </PageContainer>
       </PageSection>
 
-      <PageSection spacing="compact">
-        <PageContainer className="grid gap-6 lg:grid-cols-2">
-          <section className="bg-card rounded-card border-border border p-5">
-            <SectionHeader
-              eyebrow="Browse by category"
-              title="Start from the kind of palette you need."
-              description="Use these shortcuts when the project tone is already clear."
-            />
-            <div className="mt-6 grid gap-3 sm:grid-cols-2">
-              {categoryShortcuts.map((category, index) => (
-                <Link
-                  key={category.slug}
-                  href={`/category/${category.slug}`}
-                  className={cn(
-                    "rounded-card border-border hover:bg-muted focus-visible:bg-muted flex min-h-28 flex-col justify-between border p-4 transition-colors"
-                  )}
-                >
-                  <div className="flex items-center justify-between gap-3">
-                    <span className="text-sm font-medium">
-                      {category.label}
-                    </span>
-                    <span className="text-muted-foreground text-xs">
-                      0{index + 1}
-                    </span>
-                  </div>
-                  <p className="text-muted-foreground text-sm leading-6">
-                    {category.description}
-                  </p>
-                </Link>
-              ))}
-            </div>
-          </section>
-
-          <section className="bg-card rounded-card border-border border p-5">
-            <SectionHeader
-              eyebrow="Browse by mood"
-              title="Narrow by the feeling on the page."
-              description="A useful entry point when you know the brand tone before the category."
-            />
-            <div className="mt-6 flex flex-wrap gap-3">
-              {moodShortcuts.map((mood) => (
-                <Link
-                  key={mood.slug}
-                  href="#browse"
-                  className="hover:bg-muted focus-visible:bg-muted rounded-full border px-4 py-2 text-sm font-medium transition-colors"
-                >
-                  {mood.label}
-                </Link>
-              ))}
-            </div>
-            <div className="mt-6 space-y-3">
-              {moodShortcuts.slice(0, 3).map((mood) => (
-                <div
-                  key={mood.slug}
-                  className="flex items-start gap-3 rounded-md border px-4 py-3"
-                >
-                  <span className="mt-1 size-2.5 rounded-full bg-[color:var(--foreground)]/70" />
-                  <div className="space-y-1">
-                    <p className="text-sm font-medium">{mood.label}</p>
-                    <p className="text-muted-foreground text-sm leading-6">
-                      {mood.description}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </section>
-        </PageContainer>
-      </PageSection>
-
-      <PageSection spacing="compact">
-        <PageContainer className="flex flex-col gap-6">
+      <PageSection id="browse" spacing="compact">
+        <PageContainer width="full" className="flex flex-col gap-6">
           <SectionHeader
-            eyebrow="Featured palettes"
-            title="A short list for fast decisions."
-            description="Useful starting points when you want contrast, mood, and coverage without browsing the full catalog first."
-            actions={
-              <Link
-                href="#browse"
-                className={buttonLinkClassName({
-                  variant: "outline",
-                  size: "sm"
-                })}
-              >
-                <span>Open full library</span>
-              </Link>
-            }
+            eyebrow="Search and filter"
+            title="Browse the main palette library."
+            description="Search by palette name, category, mood, color family, or HEX value, then refine with shared controls."
           />
-          <GeneralPaletteGrid palettes={featuredGeneralPalettes} />
+          <Suspense fallback={null}>
+            <PaletteExplorerPreview
+              palettes={browsePreviewPalettes}
+              initialVisibleCount={12}
+              loadMoreStep={6}
+            />
+          </Suspense>
         </PageContainer>
       </PageSection>
 
       <PageSection spacing="compact">
-        <PageContainer className="flex flex-col gap-6">
+        <PageContainer width="full" className="flex flex-col gap-6">
           <SectionHeader
             eyebrow="Website color combinations"
             title="Primary and secondary pairs for live interface work."
@@ -274,20 +190,7 @@ export default function Home() {
               </Link>
             }
           />
-          <WebsitePaletteGrid palettes={featuredWebsitePalettes} />
-        </PageContainer>
-      </PageSection>
-
-      <PageSection id="browse" spacing="compact">
-        <PageContainer className="flex flex-col gap-6">
-          <SectionHeader
-            eyebrow="Search and filter"
-            title="Browse the main palette library."
-            description="Search by palette name, category, mood, color family, or HEX value, then refine with shared controls."
-          />
-          <Suspense fallback={null}>
-            <PaletteExplorerPreview palettes={browsePreviewPalettes} />
-          </Suspense>
+          <WebsitePaletteGrid palettes={websitePalettes.slice(0, 6)} />
         </PageContainer>
       </PageSection>
     </>

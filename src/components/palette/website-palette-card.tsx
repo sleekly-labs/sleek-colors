@@ -169,14 +169,14 @@ function WebsitePaletteCard({
           >
             Select role color or copy full palette.
           </span>
-          <div className="flex flex-wrap justify-between gap-2">
+          <div className="flex w-full flex-col gap-2">
             <Button
-              variant={copiedPalette ? "secondary" : "outline"}
               size="sm"
+              variant={copiedPalette ? "secondary" : "outline"}
               onClick={() => void handleCopyPalette()}
             >
               {copiedPalette ? <Check /> : <Copy />}
-              <span>{copiedPalette ? "Palette copied" : "Copy palette"}</span>
+              <span>{copiedPalette ? "Copied" : "Copy palette"}</span>
             </Button>
             {palette.supportsWebsitePreview ? (
               <Link

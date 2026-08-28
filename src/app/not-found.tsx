@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowLeft, Search, Shuffle } from "lucide-react";
+import { ArrowLeft, Shuffle, SwatchBook } from "lucide-react";
 
 import { PageContainer, PageSection, SectionHeader } from "@/components/layout";
 import { buttonLinkClassName } from "@/components/ui/button";
@@ -20,14 +20,14 @@ export default function NotFound() {
                   <span>Back to home</span>
                 </Link>
                 <Link
-                  href="/search"
+                  href="/palettes"
                   className={buttonLinkClassName({
                     variant: "outline",
                     size: "lg"
                   })}
                 >
-                  <Search />
-                  <span>Search palettes</span>
+                  <SwatchBook />
+                  <span>Browse palettes</span>
                 </Link>
               </div>
             }
@@ -42,7 +42,8 @@ export default function NotFound() {
             <div>
               <p className="text-sm font-medium">Try another route</p>
               <p className="text-muted-foreground text-sm">
-                Open the catalog, search directly, or jump to a random palette.
+                Open the catalog, browse website colors, or jump to a random
+                palette.
               </p>
             </div>
           </div>

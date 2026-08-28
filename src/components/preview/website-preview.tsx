@@ -4,7 +4,6 @@ import { Check, Copy, RotateCcw, Shuffle } from "lucide-react";
 import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { copyHexToClipboard } from "@/lib/clipboard";
 import type { WebsitePalette } from "@/types";
 
@@ -232,17 +231,6 @@ function WebsitePreview({ palette }: WebsitePreviewProps) {
           </div>
         ))}
       </section>
-
-      <div className="bg-card rounded-card border-border border p-4">
-        <label htmlFor="preview-email" className="text-sm font-medium">
-          Sample form control
-        </label>
-        <Input
-          id="preview-email"
-          className="mt-2 max-w-md"
-          placeholder="you@example.com"
-        />
-      </div>
     </div>
   );
 }

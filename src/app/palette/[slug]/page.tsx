@@ -132,7 +132,7 @@ export default async function PalettePage({
       {relatedGeneralPalettes.length > 0 ||
       relatedWebsitePalettes.length > 0 ? (
         <PageSection spacing="compact" className="border-t">
-          <PageContainer className="flex flex-col gap-8">
+          <PageContainer width="full" className="flex flex-col gap-8">
             <SectionHeader
               eyebrow="Keep exploring"
               title="Related palettes"

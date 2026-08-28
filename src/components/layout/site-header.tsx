@@ -1,4 +1,4 @@
-import { Search, Shuffle } from "lucide-react";
+import { Shuffle } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -8,9 +8,9 @@ import { cn } from "@/lib/utils";
 import { PageContainer } from "./primitives";
 
 const primaryLinks = [
-  { href: "/palettes", label: "Explore" },
-  { href: "/category/pastel", label: "Categories" },
-  { href: "/random", label: "Random" },
+  { href: "/palettes", label: "Palettes" },
+  { href: "/website-colors", label: "Website colors" },
+  { href: "/categories", label: "Categories" },
   { href: "/about", label: "About" }
 ] as const;
 
@@ -26,7 +26,7 @@ function SiteHeader({ className }: SiteHeaderProps) {
         className
       )}
     >
-      <PageContainer className="flex flex-col gap-2 py-2">
+      <PageContainer width="full" className="flex flex-col gap-2 py-2">
         <div className="flex items-center justify-between gap-4">
           <div className="flex min-w-0 flex-1 items-center gap-4">
             <Link href="/" className="flex w-20 shrink-0 sm:w-24 lg:w-28">
@@ -67,13 +67,6 @@ function SiteHeader({ className }: SiteHeaderProps) {
               <Shuffle />
               <span>Random</span>
             </Link>
-            <Link
-              href="/search"
-              className={buttonLinkClassName({ size: "sm" })}
-            >
-              <Search />
-              <span>Search</span>
-            </Link>
           </div>
         </div>
         <nav
@@ -89,12 +82,6 @@ function SiteHeader({ className }: SiteHeaderProps) {
               {link.label}
             </Link>
           ))}
-          <Link
-            href="/search"
-            className="text-muted-foreground hover:text-foreground rounded-md px-3 py-2 text-sm font-medium whitespace-nowrap transition-colors"
-          >
-            Search
-          </Link>
         </nav>
       </PageContainer>
     </header>

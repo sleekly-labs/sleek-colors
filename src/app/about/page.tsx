@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, Search, SwatchBook } from "lucide-react";
+import { ArrowRight, SwatchBook } from "lucide-react";
 
 import { PageContainer, PageSection, SectionHeader } from "@/components/layout";
 import { buttonLinkClassName } from "@/components/ui/button";
@@ -43,14 +43,14 @@ export default function AboutPage() {
                     <span>Browse palettes</span>
                   </Link>
                   <Link
-                    href="/search"
+                    href="/website-colors"
                     className={buttonLinkClassName({
                       variant: "outline",
                       size: "lg"
                     })}
                   >
-                    <Search />
-                    <span>Search library</span>
+                    <span>Website colors</span>
+                    <ArrowRight />
                   </Link>
                 </div>
               }
