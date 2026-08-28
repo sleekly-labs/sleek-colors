@@ -9,6 +9,7 @@
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
+    "test:ui": "vitest --ui",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "quality": "npm run lint && npm run typecheck && npm run format:check && npm run test && npm run build"
@@ -31,6 +32,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@vitest/ui": "^4.1.11",
     "eslint": "^9",
     "eslint-config-next": "16.3.3",
     "prettier": "^3.9.6",
