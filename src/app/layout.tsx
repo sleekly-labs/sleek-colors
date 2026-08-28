@@ -39,7 +39,8 @@ export const metadata: Metadata = {
     url: siteUrl,
     siteName: "Sleek Colors",
     type: "website"
-  }
+  },
+  twitter: { card: "summary_large_image" }
 };
 
 type RootLayoutProps = Readonly<{

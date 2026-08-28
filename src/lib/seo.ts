@@ -32,7 +32,7 @@ export function createPageMetadata({
         ? { images: [{ url: new URL(imagePath, siteUrl).toString() }] }
         : {})
     },
-    twitter: { card: "summary" }
+    twitter: { card: "summary_large_image" }
   };
 }
 
